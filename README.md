@@ -4,17 +4,17 @@ This repository contains the experimental codebase for the research paper:
 "Explainable Multimodal Machine Learning Model for Predicting Intensive Care Unit Admission"
 by S.Kizilisik, A.Terzi, M.Koc and S.Candemir
 
-📄 Abstract
+**📄 Abstract**
 Timely prediction of Intensive Care Unit (ICU) admission is crucial for optimizing clinical decision-making and resource management, especially in high-pressure healthcare settings. This study investigates the effectiveness of a multimodal machine learning framework that integrates imaging data and clinical data—including vital signs, laboratory results, and co-morbidities—to predict the ICU requirement of COVID-19 patients at the time of hospital admission. Utilizing a publicly available dataset, we implemented a pipeline that includes lung region segmentation, data preprocessing and augmentation, and feature learning via a pre-trained convolutional neural network architecture. The multimodal model, trained with focal loss to address class imbalance, achieved an area under the receiver operating characteristic curve of 0.93. To interpret the model’s decision, we used Gradient-weighted Class Activation Mapping to visualize salient lung regions and SHapley Additive exPlanations to assess the individual importance of clinical features. The most influential predictors included C-reactive protein, creatinine, eGFR, glucose, and symptom duration, consistent with findings from correlation analysis. The results validate the clinical relevance of our approach, which offers a transparent and effective tool for early ICU risk stratification using data commonly available upon admission.
 
-✨ Key Features & Methodology
+**✨ Key Features & Methodology**
 * **Multimodal Data Fusion:** Fusion of imaging data (Chest X-rays) and diverse clinical data (vital signs, lab results, co-morbidities).
 * **Automated Lung Region Segmentation:** Preprocessing to isolate irrelevant lung areas from imaging data.
 * **Robust Data Augmentation:** Techniques to enhance dataset diversity and model generalization.
 * **Feature Learning:** Extracts powerful features from imaging data using the pre-trained **MobileNetV3Small Convolutional Neural Network (CNN) architecture**, specifically chosen for its efficiency, mobility, and portability.
 * **Class Imbalance Handling:** Employs Focal Loss during training to effectively address imbalanced datasets, common in medical prediction tasks.
 
-💡 Explainable AI (XAI):
+**💡 Explainable AI (XAI):**
 
 * **Gradient-weighted Class Activation Mapping (Grad-CAM):** For visualizing salient regions in Chest X-rays that contribute to the model's decision.
 
@@ -44,7 +44,7 @@ python -m venv venv
 source venv/bin/activate  # On Windows: `venv\Scripts\activate`
 pip install -r requirements.txt # (Assuming you will create this file with all necessary libraries)
 ```
-Configuration:
+**Configuration:**
 The project uses a config.json file for hyperparameters and paths. Ensure you review and update config["paths"]["PATH"] and other relevant settings before running.
 
 Example config.json structure for first run
@@ -59,7 +59,7 @@ paths:
     "dataset": "dataset/",
 
 ```
-Usage
+**Usage**
 The main pipeline is controlled by the runningConfig flags in config.json. Set True for stages you wish to execute.
 
 To run the full pipeline (or selected stages):
@@ -89,10 +89,10 @@ if runningConfig["train"] == True:
     for i in range(50):
         # train.fit()
 ```
-📊 Dataset
+**📊 Dataset**
 COVID-19-NY-SBU
 
-📝 Citation
+**📝 Citation**
 This code is provided for research purposes only. If you use any part of this codebase or the methodology described, please cite the following paper:
 ```
 (TO BE UPDATED)
