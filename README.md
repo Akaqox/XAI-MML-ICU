@@ -22,7 +22,7 @@ Timely prediction of Intensive Care Unit (ICU) admission is crucial for optimizi
 
 * **Key Predictor Identification:** Identifies clinically relevant features such as C-reactive protein, creatinine, Sodium, glucose, and symptom duration as influential predictors.
 
-🚀 Performance
+# 🚀 Performance
 The multimodal model achieved an Area Under the Receiver Operating Characteristic Curve (AUC) of 0.96, demonstrating strong predictive capabilities for ICU admission.
 
 # 🛠️ Getting Started
