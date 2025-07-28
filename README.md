@@ -8,25 +8,19 @@ by S.Kizilisik, A.Terzi, M.Koc and S.Candemir
 Timely prediction of Intensive Care Unit (ICU) admission is crucial for optimizing clinical decision-making and resource management, especially in high-pressure healthcare settings. This study investigates the effectiveness of a multimodal machine learning framework that integrates imaging data and clinical data—including vital signs, laboratory results, and co-morbidities—to predict the ICU requirement of COVID-19 patients at the time of hospital admission. Utilizing a publicly available dataset, we implemented a pipeline that includes lung region segmentation, data preprocessing and augmentation, and feature learning via a pre-trained convolutional neural network architecture. The multimodal model, trained with focal loss to address class imbalance, achieved an area under the receiver operating characteristic curve of 0.93. To interpret the model’s decision, we used Gradient-weighted Class Activation Mapping to visualize salient lung regions and SHapley Additive exPlanations to assess the individual importance of clinical features. The most influential predictors included C-reactive protein, creatinine, eGFR, glucose, and symptom duration, consistent with findings from correlation analysis. The results validate the clinical relevance of our approach, which offers a transparent and effective tool for early ICU risk stratification using data commonly available upon admission.
 
 ✨ Key Features & Methodology
-This project implements a comprehensive multimodal machine learning pipeline for ICU admission prediction, featuring:
+* **Multimodal Data Fusion:** Fusion of imaging data (Chest X-rays) and diverse clinical data (vital signs, lab results, co-morbidities).
+* **Automated Lung Region Segmentation:** Preprocessing to isolate irrelevant lung areas from imaging data.
+* **Robust Data Augmentation:** Techniques to enhance dataset diversity and model generalization.
+* **Feature Learning:** Extracts powerful features from imaging data using the pre-trained **MobileNetV3Small Convolutional Neural Network (CNN) architecture**, specifically chosen for its efficiency, mobility, and portability.
+* **Class Imbalance Handling:** Employs Focal Loss during training to effectively address imbalanced datasets, common in medical prediction tasks.
 
-Multimodal Data Fusion: Seamless integration of imaging data (Chest X-rays) and diverse clinical data (vital signs, lab results, co-morbidities).
+💡 Explainable AI (XAI):
 
-Automated Lung Region Segmentation: Preprocessing to isolate relevant lung areas from imaging data.
+* **Gradient-weighted Class Activation Mapping (Grad-CAM):** For visualizing salient regions in Chest X-rays that contribute to the model's decision.
 
-Robust Data Augmentation: Techniques to enhance dataset diversity and model generalization.
+* **SHapley Additive exPlanations (SHAP):** For quantifying the individual importance and impact of clinical features on predictions.
 
-Feature Learning: Utilizes a pre-trained Convolutional Neural Network (CNN) architecture for extracting powerful features from imaging data.
-
-Class Imbalance Handling: Employs Focal Loss during training to effectively address imbalanced datasets, common in medical prediction tasks.
-
-Explainable AI (XAI):
-
-Gradient-weighted Class Activation Mapping (Grad-CAM): For visualizing salient regions in Chest X-rays that contribute to the model's decision.
-
-SHapley Additive exPlanations (SHAP): For quantifying the individual importance and impact of clinical features on predictions.
-
-Key Predictor Identification: Identifies clinically relevant features such as C-reactive protein, creatinine, eGFR, glucose, and symptom duration as influential predictors.
+* **Key Predictor Identification:** Identifies clinically relevant features such as C-reactive protein, creatinine, Sodium, glucose, and symptom duration as influential predictors.
 
 🚀 Performance
 The multimodal model achieved an Area Under the Receiver Operating Characteristic Curve (AUC) of 0.96, demonstrating strong predictive capabilities for ICU admission.
@@ -111,7 +105,8 @@ This code is provided for research purposes only. If you use any part of this co
   number={Issue Number},
   pages={Page Range},
   doi={DOI Link} # e.g., 10.1109/TMI.2024.XXXXXXX
-}```
+}
+```
 
 
 ✉️ Contact
