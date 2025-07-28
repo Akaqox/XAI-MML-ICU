@@ -34,27 +34,27 @@ The multimodal model achieved an Area Under the Receiver Operating Characteristi
 🛠️ Getting Started
 Prerequisites can be found in env_backup.yaml file
 
-
 Git
 
 Installation
 Clone the repository:
-
+```
 git clone git@github.com:Akaqox/ICU-MML-XAI.git
 cd ICU-MML-XAI
-
+```
 
 Install dependencies:
-It is highly recommended to use a virtual environment.
-
+It is highly recommended to use a virtual environment such as conda.
+```
 python -m venv venv
 source venv/bin/activate  # On Windows: `venv\Scripts\activate`
 pip install -r requirements.txt # (Assuming you will create this file with all necessary libraries)
-
+```
 Configuration:
 The project uses a config.json file for hyperparameters and paths. Ensure you review and update config["paths"]["PATH"] and other relevant settings before running.
 
 # Example config.json structure for first run
+```
 `runningConfig:
   augmentation: 1
   segmentation: 1
@@ -63,43 +63,45 @@ The project uses a config.json file for hyperparameters and paths. Ensure you re
 paths:
       "PATH": "",
     "dataset": "dataset/",
-`
+
+```
 Usage
 The main pipeline is controlled by the runningConfig flags in config.json. Set True for stages you wish to execute.
 
 To run the full pipeline (or selected stages):
-
-`python main.py`
-
+```
+python main.py
+```
 The main.py script orchestrates the following stages based on your config.json:
 
 Processing and Augmentation Stage: Loads data and performs data augmentation.
-
-`if runningConfig["augmentation"] == True:
-    # ... augmentation logic`
-
+```
+if runningConfig["augmentation"] == True:
+    # ... augmentation logic
+```
 Segmentation Stage: Performs lung region segmentation and cropping (there some adjustable options in config file).
-
-`if runningConfig["segmentation"] == True:
-    # ... segmentation logic`
-
+```
+if runningConfig["segmentation"] == True:
+    # ... segmentation logic
+```
 Dataset Construction Stage: Constructs the final dataset for training.
-
-`if runningConfig["construct_dataset"] == True:
-    # ... dataset construction logic`
-
+```
+if runningConfig["construct_dataset"] == True:
+    # ... dataset construction logic
+```
 Training Stage: Initiates the model training and evaluation process automatically. The provided code runs the training loop 50 times for experimental purposes and .
-
-`if runningConfig["train"] == True:
+```
+if runningConfig["train"] == True:
     for i in range(50):
-        # train.fit()`
-
+        # train.fit()
+```
 📊 Dataset
 COVID-19-NY-SBU
 
 📝 Citation
 This code is provided for research purposes only. If you use any part of this codebase or the methodology described, please cite the following paper:
-`(TO BE UPTADE)
+```
+(TO BE UPDATED)
 @article{Kizilisik_ICU_Prediction,
   author={Kizilisik, S. and Terzi, A. and Koc, M and  Candemir, S.},
   title={Explainable Multimodal Machine Learning Model for Predicting Intensive Care Unit Admission},
@@ -109,7 +111,7 @@ This code is provided for research purposes only. If you use any part of this co
   number={Issue Number},
   pages={Page Range},
   doi={DOI Link} # e.g., 10.1109/TMI.2024.XXXXXXX
-}`
+}```
 
 
 ✉️ Contact
