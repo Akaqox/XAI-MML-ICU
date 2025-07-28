@@ -45,8 +45,8 @@ Timely prediction of Intensive Care Unit (ICU) admission is crucial for optimizi
 
 <div style="display: flex; gap: 10px; width: 100%; align-items: center; flex-wrap: nowrap; overflow-x: auto;">
   <img src="final_results/multi%20test/mobilenetv3/plot_20250721_201000_100ep_8000img.png" height="500px" />
-  <img src="final_results/multi%20test/mobilenetv3/roc_prec_recall_20250721_201000_100ep_8000img.png" height="425px" />
-  <img src="final_results/multi%20test/mobilenetv3/cm_plot_20250721_201000_100ep_8000imgimg.png" height="425px" />
+  <img src="final_results/multi%20test/mobilenetv3/roc_prec_recall_20250721_201000_100ep_8000img.png" height="420px" />
+  <img src="final_results/multi%20test/mobilenetv3/cm_plot_20250721_201000_100ep_8000imgimg.png" height="420px" />
 </div>
 ---
 
@@ -54,8 +54,8 @@ Timely prediction of Intensive Care Unit (ICU) admission is crucial for optimizi
 
 <div style="display: flex; gap: 10px; align-items: center;">
   <img src="final_results/multi%20test/clinicv2/plot_20250721_132211_48ep_8000img.png" height="500px" />
-  <img src="final_results/multi%20test/clinicv2/roc_prec_recall_20250721_132211_48ep_8000img.png" height="425px" />
-  <img src="final_results/multi%20test/clinicv2/cm_plot_20250721_132211_48ep_8000imgimg.png" height="425px" />
+  <img src="final_results/multi%20test/clinicv2/roc_prec_recall_20250721_132211_48ep_8000img.png" height="420px" />
+  <img src="final_results/multi%20test/clinicv2/cm_plot_20250721_132211_48ep_8000imgimg.png" height="420px" />
 </div>
 
 ---
@@ -65,8 +65,8 @@ Timely prediction of Intensive Care Unit (ICU) admission is crucial for optimizi
 <!-- First row: 3 images side by side -->
 <div style="display: flex; gap: 10px; justify-content: center; margin-bottom: 20px;">
   <img src="final_results/multi%20test/multiv4/plot_20250722_152420_33ep_8000img.png" height="500px" />
-  <img src="final_results/multi%20test/multiv4/roc_prec_recall_20250722_152420_33ep_8000img.png" height="425px" />
-  <img src="final_results/multi%20test/multiv4/cm_plot_20250722_152420_33ep_8000imgimg.png" height="425px" />
+  <img src="final_results/multi%20test/multiv4/roc_prec_recall_20250722_152420_33ep_8000img.png" height="420px" />
+  <img src="final_results/multi%20test/multiv4/cm_plot_20250722_152420_33ep_8000imgimg.png" height="42*px" />
 </div>
 
 
