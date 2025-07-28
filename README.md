@@ -25,7 +25,7 @@ Timely prediction of Intensive Care Unit (ICU) admission is crucial for optimizi
 🚀 Performance
 The multimodal model achieved an Area Under the Receiver Operating Characteristic Curve (AUC) of 0.96, demonstrating strong predictive capabilities for ICU admission.
 
-🛠️ Getting Started
+# 🛠️ Getting Started
 Prerequisites can be found in env_backup.yaml file
 
 Git
@@ -109,7 +109,7 @@ This code is provided for research purposes only. If you use any part of this co
 ```
 
 
-✉️ Contact
+# ✉️ Contact
 Salih Kızılışık, Sema Candemir are with the Artificial Intelligence in
 Healthcare Laboratory, Computer Engineering Department, Eskişehir Tech-
 nical University, Eskişehir, TURKEY e-mail: salihk@ogr.eskisehir.edu.tr,
@@ -119,5 +119,5 @@ Corresponding author:SemaCandemir
 (e-mail:semacandemir@eskisehir.edu.tr).
 
 
-⚖️ License
+# ⚖️ License
 This project is licensed under the MIT License. See the LICENSE file for details.
