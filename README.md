@@ -35,21 +35,19 @@ Timely prediction of Intensive Care Unit (ICU) admission is crucial for optimizi
 
 * **Key Predictor Identification:** Identifies clinically relevant features such as C-reactive protein, creatinine, Sodium, glucose, and symptom duration as influential predictors.
 
-<!-- Final row: 2 images side by side, height 500px -->
 <div style="display: flex; gap: 10px; justify-content: center;">
-  <img src="final_results/grad_multiple.png" height="460px" />
-  <img src="final_results/Shapley2.png" height="400px" />
+  <img src="final_results/grad_multiple.png" style="width: 100%; height: auto;" />
+  <img src="final_results/Shapley2.png" style="width: 100%; height: auto;" />
 </div>
 
 # 🚀 Performance
 ## CXR Model
 
-<div style="display: flex; gap: 10px; align-items: center;">
+<div style="display: flex; gap: 10px; width: 100%; align-items: center; flex-wrap: nowrap; overflow-x: auto;">
   <img src="final_results/multi%20test/mobilenetv3/plot_20250721_201000_100ep_8000img.png" height="250px" />
   <img src="final_results/multi%20test/mobilenetv3/roc_prec_recall_20250721_201000_100ep_8000img.png" height="250px" />
   <img src="final_results/multi%20test/mobilenetv3/cm_plot_20250721_201000_100ep_8000imgimg.png" height="250px" />
 </div>
-
 ---
 
 ## Clinic Model
