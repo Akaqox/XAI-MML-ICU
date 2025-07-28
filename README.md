@@ -55,52 +55,51 @@ Configuration:
 The project uses a config.json file for hyperparameters and paths. Ensure you review and update config["paths"]["PATH"] and other relevant settings before running.
 
 # Example config.json structure for first run
-runningConfig:
+`runningConfig:
   augmentation: 1
   segmentation: 1
   construct_dataset: 1
   train: 1
 paths:
-  PATH: "/path/to/your/data/root"
-  # ... other paths
-# ... other model/training parameters
-
+      "PATH": "",
+    "dataset": "dataset/",
+`
 Usage
-The main pipeline is controlled by the runningConfig flags in config.yaml. Set True for stages you wish to execute.
+The main pipeline is controlled by the runningConfig flags in config.json. Set True for stages you wish to execute.
 
 To run the full pipeline (or selected stages):
 
-python main.py
+`python main.py`
 
-The main.py script orchestrates the following stages based on your config.yaml:
+The main.py script orchestrates the following stages based on your config.json:
 
-Processing and Augmentation Stage: Loads data, calculates mean resolution, and performs data augmentation.
+Processing and Augmentation Stage: Loads data and performs data augmentation.
 
-if runningConfig["augmentation"] == True:
-    # ... augmentation logic
+`if runningConfig["augmentation"] == True:
+    # ... augmentation logic`
 
-Segmentation Stage: Performs lung region segmentation.
+Segmentation Stage: Performs lung region segmentation and cropping (there some adjustable options in config file).
 
-if runningConfig["segmentation"] == True:
-    # ... segmentation logic
+`if runningConfig["segmentation"] == True:
+    # ... segmentation logic`
 
 Dataset Construction Stage: Constructs the final dataset for training.
 
-if runningConfig["construct_dataset"] == True:
-    # ... dataset construction logic
+`if runningConfig["construct_dataset"] == True:
+    # ... dataset construction logic`
 
-Training Stage: Initiates the model training process. The provided code runs the training loop 50 times for experimental purposes.
+Training Stage: Initiates the model training and evaluation process automatically. The provided code runs the training loop 50 times for experimental purposes and .
 
-if runningConfig["train"] == True:
+`if runningConfig["train"] == True:
     for i in range(50):
-        # ... training logic
+        # train.fit()`
 
 📊 Dataset
-COVID
+COVID-19-NY-SBU
 
 📝 Citation
 This code is provided for research purposes only. If you use any part of this codebase or the methodology described, please cite the following paper:
-(TO BE UPTADET
+`(TO BE UPTADE)
 @article{Kizilisik_ICU_Prediction,
   author={Kizilisik, S. and Terzi, A. and Koc, M and  Candemir, S.},
   title={Explainable Multimodal Machine Learning Model for Predicting Intensive Care Unit Admission},
@@ -110,17 +109,17 @@ This code is provided for research purposes only. If you use any part of this co
   number={Issue Number},
   pages={Page Range},
   doi={DOI Link} # e.g., 10.1109/TMI.2024.XXXXXXX
-}
+}`
 
 
 ✉️ Contact
-For any inquiries, please contact the authors:
+Salih Kızılışık, Sema Candemir are with the Artificial Intelligence in
+Healthcare Laboratory, Computer Engineering Department, Eskişehir Tech-
+nical University, Eskişehir, TURKEY e-mail: salihk@ogr.eskisehir.edu.tr,
+semacandemir@eskisehir.edu.tr
+Corresponding author:SemaCandemir
+(e-mail:semacandemir@eskisehir.edu.tr).
 
-S.Kizilisik: akaqox@gmail.com
-
-S.Candemir: semacandemir@eskisehir.edu.tr
-
-Ayşegül Terzi: (Please add Ayşegül Terzi's email if available)
 
 ⚖️ License
 This project is licensed under the MIT License. See the LICENSE file for details.
