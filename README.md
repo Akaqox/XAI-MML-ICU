@@ -81,6 +81,7 @@ Timely prediction of Intensive Care Unit (ICU) admission is crucial for optimizi
 | Clinic Model                | 0.807     | 0.771      | 0.792   | 0.779   | 0.866    |Clinical data only  |
 | Multimodal Model            | 0.902     | 0.875      | 0.909   | 0.888   | 0.957    |Fusion of both data |
 
+---
 
 # 🛠️ Getting Started
 Prerequisites can be found in env_backup.yaml file
