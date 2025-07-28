@@ -1,0 +1,35 @@
+# ------------------------------------
+# EXCLUDE FOLDERS
+# ------------------------------------
+dataset/**/
+resources/
+for_overleaf
+results/
+.spyproject/
+accuracy_tuner/
+
+# Ignore all files by default
+**/__pycache__/    # Exclude all '__pycache__' folders at any depth
+*__pycache__/
+**/logs/          # Exclude all 'logs' folders at any depth
+venv/             # Exclude virtual environment 'venv' folder
+.pytest_cache/    # Exclude pytest cache
+
+# ------------------------------------
+# EXCLUDE EXTENSIONS
+# ------------------------------------
+*.log             # Exclude all .log files
+*.bak             # Exclude all .bak files
+*.tmp             # Exclude all .tmp files
+*.DS_Store        # Exclude macOS specific folder metadata
+Thumbs.db         # Exclude Windows specific folder metadata
+*.h5              # Exclude all .h5 files (common for models)
+*.pkl             # Exclude all .pkl files (common for serialized objects)
+*.html
+*.keras
+*.tf
+*.csv
+
+# Optionally, you might want to re-include READMEs or license files
+# !README.md
+# !LICENSE

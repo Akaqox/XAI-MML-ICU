@@ -1,0 +1,70 @@
+{
+    
+    "runningConfig": 
+        {
+            "train_append": 0,
+            "augmentation": 1,
+            "segmentation": 0,
+            "construct_dataset": 0,
+            "construct_val_test": 0,
+            "train": 1,
+            "visualization_on": 1,
+            "segmentation_on": 0,
+            "search":0,
+            "create_feature":0,
+            "gradcam": 0
+        },
+    
+    "paths":     
+        {
+            "PATH": "",
+            "dataset": "dataset/",
+            "train": "dataset/Train", 
+            "val": "dataset/Validation", 
+            "test": "dataset/Test",
+            "csv_df":"dataset/metadata.csv",
+            "augmented":"dataset/augmented",
+            "segmented":"dataset/segmented",
+            "ready": "dataset/ready_to_train",
+            "feature": "dataset/features",
+            "feature_model":"model/cnn_mnet.keras"
+        },
+        
+    "augmentation":
+        {
+            "augmentation_params" : 
+                {
+                    "rotation_range": 5,
+                    "width_shift_range": 0.1,
+                    "height_shift_range": 0.1,
+                    "zoom_range": 0.2,
+                    "fill_mode": "nearest"
+                },
+            "kernel_size": 5,
+            "noise":0.07,
+            "target_num": 4000
+        },
+        
+
+    "segmentation_level": 0.62,
+
+    "parameters": 
+        {
+            "model": "multi",
+            "batch_size": 128,
+            "nb_classes": 2, 
+            "learning_rate": 1e-04,
+            "epochs": 100,
+            "patience": 9,
+            "dropout": 0.1,
+            "IMG_SIZE":224
+        },
+        
+    "focal_loss": 
+        {
+            "alpha": 0.25,
+            "gamma": 1.5
+            
+            
+        }
+}

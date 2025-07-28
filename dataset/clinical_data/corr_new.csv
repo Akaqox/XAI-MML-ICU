@@ -1,0 +1,75 @@
+Column Name,Total Combined Contribution (%),Correlation Value with ICU
+Acute.Hepatic.Injury..during.hospitalization.,48.79,0.254435
+HeartRate.over100,47.73,0.042777
+smoking_status_v,47.23,0.037332
+pulseOx.under90,43.64,0.289295
+dyspnea_admission_v,33.53,0.179338
+procalcitonin_0.25-0.5,27.70,0.266383
+copd_v,27.18,0.058283
+diarrhea_v,26.84,0.031281
+fever_v,26.77,0.021341
+BMI.over30,26.52,0.012252
+2951-2_Sodium [Moles/volume] in Serum or Plasma,23.70,-0.145033
+Lymphocytes.under1k,23.69,0.116983
+Acute.Kidney.Injury..during.hospitalization.,23.31,0.488947
+cad_v,23.05,0.059682
+dm_v,22.33,0.1484
+Sodium_135-145,22.07,-0.140854
+48058-2_Fibrin D-dimer DDU [Mass/volume] in Platelet poor plasma by Immunoassay,21.60,0.02055
+malignancies_v,20.47,-0.001675
+1988-5_C reactive protein [Mass/volume] in Serum or Plasma,19.96,0.276718
+76282-3_Heart rate.beat-to-beat by EKG,18.43,0.076243
+Chloride_96-107,17.51,-0.158886
+abdominal_pain_v,17.01,0.01165
+D_dimer_500-3000,15.76,0.070186
+33256-9_Leukocytes [#/volume] corrected for nucleated erythrocytes in Blood by Automated count,15.30,0.131179
+2160-0_Creatinine [Mass/volume] in Serum or Plasma,14.98,0.044537
+nsaid_use_v,13.12,0.012675
+Aspartate.over40,12.72,0.187739
+vomiting_v,12.68,-0.026631
+age.splits,12.57,0.052161
+SBD_120-139,12.28,-0.076816
+BMI.over35,11.95,0.057549
+arb_v,11.92,0.052817
+gender_concept_name,11.90,-0.105125
+62238-1_Glomerular filtration rate/1.73 sq M.predicted [Volume Rate/Area] in Serum, Plasma or Blood by Creatinine-based formula (CKD-EPI),11.81,-0.097506
+temperature.over38,11.39,0.051093
+Potassium_3.5-5.2,11.29,0.008715
+2951-2_Sodium [Moles/volume] in Serum or Plasma.1,11.05,-0.145033
+2823-3_Potassium [Moles/volume] in Serum or Plasma,10.93,0.067999
+htn_v,10.43,0.128873
+1963-8_Bicarbonate [Moles/volume] in Serum or Plasma,9.99,-0.181398
+731-0_Lymphocytes [#/volume] in Blood by Automated count,9.58,-0.138942
+1920-8_Aspartate aminotransferase [Enzymatic activity/volume] in Serum or Plasma,9.50,0.047459
+Respiration.over24,9.08,0.24883
+eGFR_30-60,8.81,-0.068553
+6598-7_Troponin T.cardiac [Mass/volume] in Serum or Plasma,8.28,0.0395
+nausea_v,7.14,-0.050633
+MAP_65-90,6.75,-0.038334
+other_lung_disease_v,6.56,0.058651
+3094-0_Urea nitrogen [Mass/volume] in Serum or Plasma,6.34,0.117743
+ckd_v,6.06,-0.00433
+acei_v,5.71,0.071881
+2075-0_Chloride [Moles/volume] in Serum or Plasma,5.50,-0.164554
+8480-6_Systolic blood pressure,5.42,-0.120866
+antibiotics_use_v,5.20,0.049631
+39156-5_Body mass index (BMI) [Ratio],5.11,0.044458
+cough_v,5.10,0.043971
+2345-7_Glucose [Mass/volume] in Serum or Plasma,5.02,0.210781
+SBP_120-139,4.83,-0.076816
+days_prior_sx,4.73,0.047016
+Creatinine_0.5-1.2,4.45,0.103222
+751-8_Neutrophils [#/volume] in Blood by Automated count,4.42,0.123875
+hf_ef_v,4.23,0.080759
+76536-2_Mean blood pressure by Noninvasive,4.22,-0.06982
+Blood_Urea_Nitrogen_5-20,4.20,0.109923
+1744-2_Alanine aminotransferase [Enzymatic activity/volume] in Serum or Plasma by No addition of P-5'-P,3.22,-0.002335
+75241-0_Procalcitonin [Mass/volume] in Serum or Plasma by Immunoassay,2.98,0.111615
+2524-7_Lactate [Moles/volume] in Serum or Plasma,2.87,0.239582
+Alanine.over60,1.98,0.030441
+8331-1_Oral temperature,1.69,0.042758
+Troponin.above0.01,1.39,0.022112
+Bicarbonate_21-31,1.32,-0.141441
+59408-5_Oxygen saturation in Arterial blood by Pulse oximetry,1.25,-0.341967
+9279-1_Respiratory rate,0.88,0.28589
+is_icu,N/A,1.0
