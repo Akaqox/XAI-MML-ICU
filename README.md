@@ -55,7 +55,7 @@ The project uses a config.json file for hyperparameters and paths. Ensure you re
 
 # Example config.json structure for first run
 ```
-`runningConfig:
+runningConfig:
   augmentation: 1
   segmentation: 1
   construct_dataset: 1
