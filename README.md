@@ -47,7 +47,7 @@ pip install -r requirements.txt # (Assuming you will create this file with all n
 Configuration:
 The project uses a config.json file for hyperparameters and paths. Ensure you review and update config["paths"]["PATH"] and other relevant settings before running.
 
-# Example config.json structure for first run
+Example config.json structure for first run
 ```
 runningConfig:
   augmentation: 1
