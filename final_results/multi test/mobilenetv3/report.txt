@@ -1,0 +1,26 @@
+--------------------- New Evaluation -------------------
+20250721_201000
+Model Path: models/weights_20250721_201000_100ep_8000img
+Plot Path: plots/cm_plot_20250721_201000_100ep_8000img
+loss parameters: {'alpha': 0.25, 'gamma': 1.5}
+Train parameters: {'model': 'mobilenet', 'batch_size': 128, 'nb_classes': 2, 'learning_rate': 1e-05, 'epochs': 100, 'patience': 9, 'dropout': 0.1, 'IMG_SIZE': 224}
+Test Accuracy :0.8752122241086587
+Test Loss :0.13467678427696228
+Optimal Threshold: 0.4555610716342926
+AUC :0.9319769937333676
+PR_AUC :0.9653449452467321
+Plot Path: plots/plot_20250721_201000_100ep_8000img
+Confusion Matrix Path: ../out/plots/cm_plot_20250721_201000_100ep_8000img
+              precision    recall  f1-score   support
+
+     Not ICU     0.7562    0.8612    0.8053       353
+         ICU     0.9369    0.8812    0.9082       825
+
+    accuracy                         0.8752      1178
+   macro avg     0.8465    0.8712    0.8567      1178
+weighted avg     0.8827    0.8752    0.8774      1178
+
+-------------------SHAPLEY ANALYSIS-------------------
+Average Contribution of Images: 0.00%
+Average Contribution of Clinic Data: 0.00%
+

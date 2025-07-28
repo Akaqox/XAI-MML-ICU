@@ -1,0 +1,491 @@
+--------------------- New Evaluation -------------------
+20250708_182709
+Model Path: models/weights_20250708_182707_46ep_8000img
+Plot Path: plots/cm_plot_20250708_182707_46ep_8000img
+loss parameters: {'alpha': 0.25, 'gamma': 1.5}
+Train parameters: {'model': 'multi', 'batch_size': 128, 'nb_classes': 2, 'learning_rate': 5e-05, 'epochs': 100, 'patience': 9, 'dropout': 0.1, 'IMG_SIZE': 224}
+Test Accuracy :0.8879456706281834
+Test Loss :0.10483212023973465
+Optimal Threshold: 0.5182911157608032AUC :0.9531873980599193
+Plot Path: plots/plot_20250708_182707_46ep_8000img
+Confusion Matrix Path: ../out/plots/cm_plot_20250708_182707_46ep_8000img
+              precision    recall  f1-score   support
+
+     Not ICU     0.7529    0.9320    0.8329       353
+         ICU     0.9676    0.8691    0.9157       825
+
+    accuracy                         0.8879      1178
+   macro avg     0.8602    0.9006    0.8743      1178
+weighted avg     0.9033    0.8879    0.8909      1178
+
+-------------------SHAPLEY ANALYSIS-------------------
+Average Contribution of Images: 65.92%
+Average Contribution of Clinic Data: 34.08%
+
+Top Clinical SHAP Contributions (%):
+  1988-5_C reactive protein [Mass/volume] in Serum or Plasma: 21.82%
+  days_prior_sx: 8.67%
+  Acute.Kidney.Injury..during.hospitalization.: 6.84%
+  2951-2_Sodium [Moles/volume] in Serum or Plasma: 5.51%
+  2345-7_Glucose [Mass/volume] in Serum or Plasma: 4.30%
+  Chloride_96-107: 4.25%
+  8331-1_Oral temperature: 3.76%
+  htn_v: 3.70%
+  gender_concept_name: 3.24%
+  eGFR_30-60: 2.95%
+  antibiotics_use_v: 2.20%
+  62238-1_Glomerular filtration rate/1.73 sq M.predicted [Volume Rate/Area] in Serum, Plasma or Blood by Creatinine-based formula (CKD-EPI): 2.09%
+  1963-8_Bicarbonate [Moles/volume] in Serum or Plasma: 1.95%
+  BMI.over30: 1.84%
+  2951-2_Sodium [Moles/volume] in Serum or Plasma.1: 1.79%
+  2823-3_Potassium [Moles/volume] in Serum or Plasma: 1.32%
+  59408-5_Oxygen saturation in Arterial blood by Pulse oximetry: 1.10%
+  2160-0_Creatinine [Mass/volume] in Serum or Plasma: 1.09%
+  other_lung_disease_v: 1.09%
+  Sodium_135-145: 1.08%
+  2524-7_Lactate [Moles/volume] in Serum or Plasma: 1.06%
+  1920-8_Aspartate aminotransferase [Enzymatic activity/volume] in Serum or Plasma: 0.98%
+  dm_v: 0.95%
+  procalcitonin_0.25-0.5: 0.88%
+  pulseOx.under90: 0.82%
+  76282-3_Heart rate.beat-to-beat by EKG: 0.75%
+  temperature.over38: 0.73%
+  3094-0_Urea nitrogen [Mass/volume] in Serum or Plasma: 0.70%
+  1744-2_Alanine aminotransferase [Enzymatic activity/volume] in Serum or Plasma by No addition of P-5'-P: 0.69%
+  smoking_status_v: 0.68%
+  9279-1_Respiratory rate: 0.67%
+  Respiration.over24: 0.67%
+  2075-0_Chloride [Moles/volume] in Serum or Plasma: 0.65%
+  Creatinine_0.5-1.2: 0.65%
+  Lymphocytes.under1k: 0.64%
+  D_dimer_500-3000: 0.57%
+  HeartRate.over100: 0.52%
+  Bicarbonate_21-31: 0.51%
+  Acute.Hepatic.Injury..during.hospitalization.: 0.49%
+  Blood_Urea_Nitrogen_5-20: 0.49%
+  dyspnea_admission_v: 0.45%
+  Potassium_3.5-5.2: 0.43%
+  Aspartate.over40: 0.41%
+  Alanine.over60: 0.36%
+  diarrhea_v: 0.34%
+  age.splits: 0.26%
+  BMI.over35: 0.26%
+  hf_ef_v: 0.25%
+  6598-7_Troponin T.cardiac [Mass/volume] in Serum or Plasma: 0.24%
+  copd_v: 0.22%
+  Troponin.above0.01: 0.20%
+  76536-2_Mean blood pressure by Noninvasive: 0.20%
+  fever_v: 0.17%
+  abdominal_pain_v: 0.15%
+  SBP_120-139: 0.15%
+  8480-6_Systolic blood pressure: 0.12%
+  arb_v: 0.12%
+  nsaid_use_v: 0.11%
+  MAP_65-90: 0.11%
+  cad_v: 0.09%
+  cough_v: 0.08%
+  731-0_Lymphocytes [#/volume] in Blood by Automated count: 0.08%
+  nausea_v: 0.08%
+  33256-9_Leukocytes [#/volume] corrected for nucleated erythrocytes in Blood by Automated count: 0.06%
+  ckd_v: 0.06%
+  39156-5_Body mass index (BMI) [Ratio]: 0.05%
+  751-8_Neutrophils [#/volume] in Blood by Automated count: 0.05%
+  48058-2_Fibrin D-dimer DDU [Mass/volume] in Platelet poor plasma by Immunoassay: 0.05%
+  75241-0_Procalcitonin [Mass/volume] in Serum or Plasma by Immunoassay: 0.04%
+  vomiting_v: 0.04%
+  acei_v: 0.02%
+  malignancies_v: 0.02%
+
+--------------------- New Evaluation -------------------
+20250708_132750
+Model Path: models/weights_20250708_132747_27ep_8000img
+Plot Path: plots/cm_plot_20250708_132747_27ep_8000img
+loss parameters: {'alpha': 0.25, 'gamma': 1.5}
+Train parameters: {'model': 'multi', 'batch_size': 256, 'nb_classes': 2, 'learning_rate': 0.0001, 'epochs': 100, 'patience': 9, 'dropout': 0.1, 'IMG_SIZE': 224}
+Test Accuracy :0.8786078098471987
+Test Loss :0.099484883248806
+Optimal Threshold: 0.5326379537582397AUC :0.9540389733024294
+Plot Path: plots/plot_20250708_132747_27ep_8000img
+Confusion Matrix Path: ../out/plots/cm_plot_20250708_132747_27ep_8000img
+              precision    recall  f1-score   support
+
+     Not ICU     0.7408    0.9150    0.8188       353
+         ICU     0.9596    0.8630    0.9087       825
+
+    accuracy                         0.8786      1178
+   macro avg     0.8502    0.8890    0.8638      1178
+weighted avg     0.8940    0.8786    0.8818      1178
+
+-------------------SHAPLEY ANALYSIS-------------------
+Average Contribution of Images: 62.02%
+Average Contribution of Clinic Data: 37.98%
+
+Top Clinical SHAP Contributions (%):
+  1988-5_C reactive protein [Mass/volume] in Serum or Plasma: 10.46%
+  days_prior_sx: 5.91%
+  gender_concept_name: 5.77%
+  cough_v: 5.52%
+  SBP_120-139: 5.37%
+  Acute.Kidney.Injury..during.hospitalization.: 4.39%
+  9279-1_Respiratory rate: 3.81%
+  Aspartate.over40: 3.61%
+  dyspnea_admission_v: 3.54%
+  procalcitonin_0.25-0.5: 3.29%
+  eGFR_30-60: 3.09%
+  62238-1_Glomerular filtration rate/1.73 sq M.predicted [Volume Rate/Area] in Serum, Plasma or Blood by Creatinine-based formula (CKD-EPI): 3.09%
+  fever_v: 3.01%
+  antibiotics_use_v: 2.37%
+  2524-7_Lactate [Moles/volume] in Serum or Plasma: 2.31%
+  39156-5_Body mass index (BMI) [Ratio]: 1.99%
+  other_lung_disease_v: 1.78%
+  pulseOx.under90: 1.73%
+  htn_v: 1.70%
+  Chloride_96-107: 1.64%
+  Sodium_135-145: 1.60%
+  Lymphocytes.under1k: 1.54%
+  8480-6_Systolic blood pressure: 1.44%
+  1963-8_Bicarbonate [Moles/volume] in Serum or Plasma: 1.29%
+  age.splits: 1.22%
+  dm_v: 1.13%
+  76282-3_Heart rate.beat-to-beat by EKG: 1.07%
+  76536-2_Mean blood pressure by Noninvasive: 1.05%
+  59408-5_Oxygen saturation in Arterial blood by Pulse oximetry: 1.03%
+  HeartRate.over100: 0.85%
+  MAP_65-90: 0.78%
+  2951-2_Sodium [Moles/volume] in Serum or Plasma: 0.77%
+  BMI.over30: 0.76%
+  751-8_Neutrophils [#/volume] in Blood by Automated count: 0.72%
+  diarrhea_v: 0.66%
+  BMI.over35: 0.58%
+  abdominal_pain_v: 0.57%
+  3094-0_Urea nitrogen [Mass/volume] in Serum or Plasma: 0.52%
+  Blood_Urea_Nitrogen_5-20: 0.51%
+  33256-9_Leukocytes [#/volume] corrected for nucleated erythrocytes in Blood by Automated count: 0.50%
+  Acute.Hepatic.Injury..during.hospitalization.: 0.50%
+  temperature.over38: 0.47%
+  8331-1_Oral temperature: 0.44%
+  2951-2_Sodium [Moles/volume] in Serum or Plasma.1: 0.43%
+  731-0_Lymphocytes [#/volume] in Blood by Automated count: 0.42%
+  1920-8_Aspartate aminotransferase [Enzymatic activity/volume] in Serum or Plasma: 0.42%
+  D_dimer_500-3000: 0.41%
+  arb_v: 0.36%
+  smoking_status_v: 0.36%
+  hf_ef_v: 0.34%
+  Bicarbonate_21-31: 0.34%
+  Potassium_3.5-5.2: 0.30%
+  2160-0_Creatinine [Mass/volume] in Serum or Plasma: 0.30%
+  vomiting_v: 0.27%
+  ckd_v: 0.26%
+  48058-2_Fibrin D-dimer DDU [Mass/volume] in Platelet poor plasma by Immunoassay: 0.23%
+  6598-7_Troponin T.cardiac [Mass/volume] in Serum or Plasma: 0.21%
+  1744-2_Alanine aminotransferase [Enzymatic activity/volume] in Serum or Plasma by No addition of P-5'-P: 0.17%
+  75241-0_Procalcitonin [Mass/volume] in Serum or Plasma by Immunoassay: 0.16%
+  cad_v: 0.13%
+  Respiration.over24: 0.13%
+  Troponin.above0.01: 0.10%
+  nsaid_use_v: 0.10%
+  Creatinine_0.5-1.2: 0.04%
+  acei_v: 0.03%
+  copd_v: 0.03%
+  2075-0_Chloride [Moles/volume] in Serum or Plasma: 0.03%
+  2345-7_Glucose [Mass/volume] in Serum or Plasma: 0.02%
+  nausea_v: 0.01%
+  malignancies_v: 0.00%
+  2823-3_Potassium [Moles/volume] in Serum or Plasma: 0.00%
+  Alanine.over60: 0.00%
+  
+  
+--------------------- New Evaluation -------------------
+20250708_180406
+Model Path: models/weights_20250708_180404_52ep_8000img
+Plot Path: plots/cm_plot_20250708_180404_52ep_8000img
+loss parameters: {'alpha': 0.25, 'gamma': 1.5}
+Train parameters: {'model': 'multi', 'batch_size': 128, 'nb_classes': 2, 'learning_rate': 5e-05, 'epochs': 100, 'patience': 9, 'dropout': 0.1, 'IMG_SIZE': 224}
+Test Accuracy :0.8769100169779287
+Test Loss :0.10205932706594467
+Optimal Threshold: 0.49432313442230225AUC :0.9535960168254783
+Plot Path: plots/plot_20250708_180404_52ep_8000img
+Confusion Matrix Path: ../out/plots/cm_plot_20250708_180404_52ep_8000img
+              precision    recall  f1-score   support
+
+     Not ICU     0.7441    0.8980    0.8139       353
+         ICU     0.9521    0.8679    0.9081       825
+
+    accuracy                         0.8769      1178
+   macro avg     0.8481    0.8829    0.8610      1178
+weighted avg     0.8898    0.8769    0.8798      1178
+
+-------------------SHAPLEY ANALYSIS-------------------
+Average Contribution of Images: 65.90%
+Average Contribution of Clinic Data: 34.10%
+
+Top Clinical SHAP Contributions (%):
+  procalcitonin_0.25-0.5: 10.82%
+  Acute.Kidney.Injury..during.hospitalization.: 9.25%
+  2951-2_Sodium [Moles/volume] in Serum or Plasma.1: 6.05%
+  gender_concept_name: 5.44%
+  dyspnea_admission_v: 5.03%
+  Aspartate.over40: 4.77%
+  39156-5_Body mass index (BMI) [Ratio]: 4.41%
+  Chloride_96-107: 4.24%
+  pulseOx.under90: 3.58%
+  htn_v: 3.52%
+  8331-1_Oral temperature: 3.09%
+  2951-2_Sodium [Moles/volume] in Serum or Plasma: 3.08%
+  Sodium_135-145: 3.01%
+  days_prior_sx: 2.59%
+  2160-0_Creatinine [Mass/volume] in Serum or Plasma: 2.43%
+  59408-5_Oxygen saturation in Arterial blood by Pulse oximetry: 2.17%
+  2524-7_Lactate [Moles/volume] in Serum or Plasma: 2.11%
+  other_lung_disease_v: 1.68%
+  731-0_Lymphocytes [#/volume] in Blood by Automated count: 1.63%
+  antibiotics_use_v: 1.54%
+  eGFR_30-60: 1.28%
+  BMI.over30: 1.26%
+  62238-1_Glomerular filtration rate/1.73 sq M.predicted [Volume Rate/Area] in Serum, Plasma or Blood by Creatinine-based formula (CKD-EPI): 1.20%
+  dm_v: 1.17%
+  1963-8_Bicarbonate [Moles/volume] in Serum or Plasma: 1.06%
+  6598-7_Troponin T.cardiac [Mass/volume] in Serum or Plasma: 1.03%
+  diarrhea_v: 0.99%
+  Creatinine_0.5-1.2: 0.93%
+  Acute.Hepatic.Injury..during.hospitalization.: 0.88%
+  SBP_120-139: 0.86%
+  smoking_status_v: 0.84%
+  fever_v: 0.70%
+  BMI.over35: 0.63%
+  9279-1_Respiratory rate: 0.63%
+  2823-3_Potassium [Moles/volume] in Serum or Plasma: 0.53%
+  temperature.over38: 0.50%
+  3094-0_Urea nitrogen [Mass/volume] in Serum or Plasma: 0.50%
+  2075-0_Chloride [Moles/volume] in Serum or Plasma: 0.49%
+  76536-2_Mean blood pressure by Noninvasive: 0.32%
+  Alanine.over60: 0.31%
+  abdominal_pain_v: 0.28%
+  Troponin.above0.01: 0.27%
+  2345-7_Glucose [Mass/volume] in Serum or Plasma: 0.25%
+  Potassium_3.5-5.2: 0.21%
+  hf_ef_v: 0.21%
+  age.splits: 0.20%
+  33256-9_Leukocytes [#/volume] corrected for nucleated erythrocytes in Blood by Automated count: 0.20%
+  cough_v: 0.19%
+  1988-5_C reactive protein [Mass/volume] in Serum or Plasma: 0.14%
+  D_dimer_500-3000: 0.11%
+  vomiting_v: 0.11%
+  751-8_Neutrophils [#/volume] in Blood by Automated count: 0.11%
+  Respiration.over24: 0.10%
+  copd_v: 0.10%
+  HeartRate.over100: 0.10%
+  Blood_Urea_Nitrogen_5-20: 0.09%
+  nausea_v: 0.08%
+  1744-2_Alanine aminotransferase [Enzymatic activity/volume] in Serum or Plasma by No addition of P-5'-P: 0.08%
+  76282-3_Heart rate.beat-to-beat by EKG: 0.08%
+  75241-0_Procalcitonin [Mass/volume] in Serum or Plasma by Immunoassay: 0.08%
+  1920-8_Aspartate aminotransferase [Enzymatic activity/volume] in Serum or Plasma: 0.07%
+  malignancies_v: 0.07%
+  ckd_v: 0.06%
+  arb_v: 0.05%
+  cad_v: 0.05%
+  acei_v: 0.04%
+  nsaid_use_v: 0.03%
+  MAP_65-90: 0.03%
+  Bicarbonate_21-31: 0.03%
+  Lymphocytes.under1k: 0.02%
+  48058-2_Fibrin D-dimer DDU [Mass/volume] in Platelet poor plasma by Immunoassay: 0.01%
+  8480-6_Systolic blood pressure: 0.00%
+  
+--------------------- New Evaluation -------------------
+20250708_184429
+Model Path: models/weights_20250708_184426_40ep_8000img
+Plot Path: plots/cm_plot_20250708_184426_40ep_8000img
+loss parameters: {'alpha': 0.25, 'gamma': 1.5}
+Train parameters: {'model': 'multi', 'batch_size': 128, 'nb_classes': 2, 'learning_rate': 5e-05, 'epochs': 100, 'patience': 9, 'dropout': 0.1, 'IMG_SIZE': 224}
+Test Accuracy :0.8777589134125636
+Test Loss :0.10516494512557983
+Optimal Threshold: 0.543157160282135AUC :0.948665121469654
+Plot Path: plots/plot_20250708_184426_40ep_8000img
+Confusion Matrix Path: ../out/plots/cm_plot_20250708_184426_40ep_8000img
+              precision    recall  f1-score   support
+
+     Not ICU     0.7287    0.9433    0.8222       353
+         ICU     0.9723    0.8497    0.9069       825
+
+    accuracy                         0.8778      1178
+   macro avg     0.8505    0.8965    0.8645      1178
+weighted avg     0.8993    0.8778    0.8815      1178
+
+-------------------SHAPLEY ANALYSIS-------------------
+Average Contribution of Images: 67.17%
+Average Contribution of Clinic Data: 32.83%
+
+Top Clinical SHAP Contributions (%):
+  Acute.Kidney.Injury..during.hospitalization.: 6.03%
+  pulseOx.under90: 5.55%
+  59408-5_Oxygen saturation in Arterial blood by Pulse oximetry: 4.79%
+  dm_v: 4.57%
+  9279-1_Respiratory rate: 4.24%
+  Chloride_96-107: 4.14%
+  Aspartate.over40: 4.04%
+  76536-2_Mean blood pressure by Noninvasive: 3.94%
+  2951-2_Sodium [Moles/volume] in Serum or Plasma: 3.48%
+  62238-1_Glomerular filtration rate/1.73 sq M.predicted [Volume Rate/Area] in Serum, Plasma or Blood by Creatinine-based formula (CKD-EPI): 3.42%
+  nausea_v: 3.27%
+  procalcitonin_0.25-0.5: 3.27%
+  abdominal_pain_v: 3.23%
+  htn_v: 3.23%
+  2951-2_Sodium [Moles/volume] in Serum or Plasma.1: 3.00%
+  nsaid_use_v: 2.91%
+  Sodium_135-145: 2.78%
+  1920-8_Aspartate aminotransferase [Enzymatic activity/volume] in Serum or Plasma: 2.14%
+  BMI.over30: 2.07%
+  731-0_Lymphocytes [#/volume] in Blood by Automated count: 2.03%
+  gender_concept_name: 1.90%
+  antibiotics_use_v: 1.80%
+  days_prior_sx: 1.78%
+  8331-1_Oral temperature: 1.69%
+  other_lung_disease_v: 1.66%
+  smoking_status_v: 1.47%
+  HeartRate.over100: 1.24%
+  dyspnea_admission_v: 1.17%
+  diarrhea_v: 1.16%
+  SBP_120-139: 1.06%
+  2524-7_Lactate [Moles/volume] in Serum or Plasma: 0.99%
+  33256-9_Leukocytes [#/volume] corrected for nucleated erythrocytes in Blood by Automated count: 0.91%
+  fever_v: 0.89%
+  Respiration.over24: 0.84%
+  cough_v: 0.75%
+  MAP_65-90: 0.62%
+  age.splits: 0.52%
+  2160-0_Creatinine [Mass/volume] in Serum or Plasma: 0.48%
+  Acute.Hepatic.Injury..during.hospitalization.: 0.43%
+  Potassium_3.5-5.2: 0.41%
+  6598-7_Troponin T.cardiac [Mass/volume] in Serum or Plasma: 0.39%
+  2823-3_Potassium [Moles/volume] in Serum or Plasma: 0.37%
+  Blood_Urea_Nitrogen_5-20: 0.36%
+  temperature.over38: 0.35%
+  3094-0_Urea nitrogen [Mass/volume] in Serum or Plasma: 0.34%
+  76282-3_Heart rate.beat-to-beat by EKG: 0.33%
+  Troponin.above0.01: 0.30%
+  Lymphocytes.under1k: 0.30%
+  BMI.over35: 0.29%
+  arb_v: 0.28%
+  1744-2_Alanine aminotransferase [Enzymatic activity/volume] in Serum or Plasma by No addition of P-5'-P: 0.27%
+  eGFR_30-60: 0.27%
+  1988-5_C reactive protein [Mass/volume] in Serum or Plasma: 0.23%
+  8480-6_Systolic blood pressure: 0.23%
+  751-8_Neutrophils [#/volume] in Blood by Automated count: 0.22%
+  Alanine.over60: 0.18%
+  Creatinine_0.5-1.2: 0.18%
+  2345-7_Glucose [Mass/volume] in Serum or Plasma: 0.17%
+  vomiting_v: 0.16%
+  2075-0_Chloride [Moles/volume] in Serum or Plasma: 0.15%
+  hf_ef_v: 0.15%
+  ckd_v: 0.12%
+  copd_v: 0.11%
+  cad_v: 0.10%
+  acei_v: 0.04%
+  malignancies_v: 0.04%
+  48058-2_Fibrin D-dimer DDU [Mass/volume] in Platelet poor plasma by Immunoassay: 0.04%
+  39156-5_Body mass index (BMI) [Ratio]: 0.04%
+  75241-0_Procalcitonin [Mass/volume] in Serum or Plasma by Immunoassay: 0.03%
+  1963-8_Bicarbonate [Moles/volume] in Serum or Plasma: 0.02%
+  Bicarbonate_21-31: 0.02%
+  D_dimer_500-3000: 0.00%
+--------------------- New Evaluation -------------------
+20250708_203536
+Model Path: models/weights_20250708_203533_57ep_8000img
+Plot Path: plots/cm_plot_20250708_203533_57ep_8000img
+loss parameters: {'alpha': 0.25, 'gamma': 1.5}
+Train parameters: {'model': 'multi', 'batch_size': 128, 'nb_classes': 2, 'learning_rate': 5e-05, 'epochs': 100, 'patience': 9, 'dropout': 0.1, 'IMG_SIZE': 224}
+Test Accuracy :0.8709677419354839
+Test Loss :0.10605131834745407
+Optimal Threshold: 0.5766065716743469AUC :0.9517761181217272
+Plot Path: plots/plot_20250708_203533_57ep_8000img
+Confusion Matrix Path: ../out/plots/cm_plot_20250708_203533_57ep_8000img
+              precision    recall  f1-score   support
+
+     Not ICU     0.7134    0.9518    0.8155       353
+         ICU     0.9760    0.8364    0.9008       825
+
+    accuracy                         0.8710      1178
+   macro avg     0.8447    0.8941    0.8582      1178
+weighted avg     0.8973    0.8710    0.8752      1178
+
+
+-------------------SHAPLEY ANALYSIS-------------------
+Average Contribution of Images: 63.66%
+Average Contribution of Clinic Data: 36.34%
+
+Top Clinical SHAP Contributions (%):
+  1988-5_C reactive protein [Mass/volume] in Serum or Plasma: 18.07%
+  751-8_Neutrophils [#/volume] in Blood by Automated count: 11.56%
+  59408-5_Oxygen saturation in Arterial blood by Pulse oximetry: 11.17%
+  Acute.Kidney.Injury..during.hospitalization.: 6.61%
+  Chloride_96-107: 5.24%
+  76536-2_Mean blood pressure by Noninvasive: 3.95%
+  33256-9_Leukocytes [#/volume] corrected for nucleated erythrocytes in Blood by Automated count: 3.82%
+  2951-2_Sodium [Moles/volume] in Serum or Plasma.1: 3.08%
+  pulseOx.under90: 3.02%
+  gender_concept_name: 2.95%
+  2075-0_Chloride [Moles/volume] in Serum or Plasma: 2.65%
+  BMI.over30: 2.00%
+  Aspartate.over40: 1.99%
+  2951-2_Sodium [Moles/volume] in Serum or Plasma: 1.78%
+  2524-7_Lactate [Moles/volume] in Serum or Plasma: 1.72%
+  temperature.over38: 1.32%
+  other_lung_disease_v: 1.29%
+  eGFR_30-60: 1.26%
+  antibiotics_use_v: 1.00%
+  D_dimer_500-3000: 0.96%
+  diarrhea_v: 0.76%
+  htn_v: 0.74%
+  2345-7_Glucose [Mass/volume] in Serum or Plasma: 0.70%
+  procalcitonin_0.25-0.5: 0.67%
+  SBP_120-139: 0.66%
+  Sodium_135-145: 0.65%
+  dm_v: 0.63%
+  9279-1_Respiratory rate: 0.58%
+  1744-2_Alanine aminotransferase [Enzymatic activity/volume] in Serum or Plasma by No addition of P-5'-P: 0.56%
+  Lymphocytes.under1k: 0.46%
+  smoking_status_v: 0.45%
+  Acute.Hepatic.Injury..during.hospitalization.: 0.45%
+  HeartRate.over100: 0.42%
+  cough_v: 0.40%
+  Troponin.above0.01: 0.39%
+  731-0_Lymphocytes [#/volume] in Blood by Automated count: 0.38%
+  dyspnea_admission_v: 0.36%
+  1963-8_Bicarbonate [Moles/volume] in Serum or Plasma: 0.34%
+  cad_v: 0.33%
+  fever_v: 0.32%
+  BMI.over35: 0.32%
+  8331-1_Oral temperature: 0.31%
+  6598-7_Troponin T.cardiac [Mass/volume] in Serum or Plasma: 0.28%
+  Potassium_3.5-5.2: 0.27%
+  Creatinine_0.5-1.2: 0.27%
+  age.splits: 0.25%
+  MAP_65-90: 0.22%
+  8480-6_Systolic blood pressure: 0.22%
+  2823-3_Potassium [Moles/volume] in Serum or Plasma: 0.20%
+  abdominal_pain_v: 0.20%
+  Blood_Urea_Nitrogen_5-20: 0.17%
+  Bicarbonate_21-31: 0.15%
+  62238-1_Glomerular filtration rate/1.73 sq M.predicted [Volume Rate/Area] in Serum, Plasma or Blood by Creatinine-based formula (CKD-EPI): 0.14%
+  days_prior_sx: 0.14%
+  Alanine.over60: 0.14%
+  Respiration.over24: 0.13%
+  vomiting_v: 0.12%
+  2160-0_Creatinine [Mass/volume] in Serum or Plasma: 0.11%
+  hf_ef_v: 0.09%
+  malignancies_v: 0.08%
+  nsaid_use_v: 0.07%
+  arb_v: 0.07%
+  48058-2_Fibrin D-dimer DDU [Mass/volume] in Platelet poor plasma by Immunoassay: 0.06%
+  ckd_v: 0.06%
+  3094-0_Urea nitrogen [Mass/volume] in Serum or Plasma: 0.06%
+  1920-8_Aspartate aminotransferase [Enzymatic activity/volume] in Serum or Plasma: 0.06%
+  75241-0_Procalcitonin [Mass/volume] in Serum or Plasma by Immunoassay: 0.04%
+  76282-3_Heart rate.beat-to-beat by EKG: 0.03%
+  acei_v: 0.02%
+  copd_v: 0.01%
+  39156-5_Body mass index (BMI) [Ratio]: 0.01%
+  nausea_v: 0.00%
+

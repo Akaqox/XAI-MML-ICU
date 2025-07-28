@@ -1,0 +1,101 @@
+
+--------------------- New Evaluation -------------------
+20250722_152423
+Model Path: models/weights_20250722_152420_33ep_8000img
+Plot Path: plots/cm_plot_20250722_152420_33ep_8000img
+loss parameters: {'alpha': 0.25, 'gamma': 1.5}
+Train parameters: {'model': 'multi', 'batch_size': 128, 'nb_classes': 2, 'learning_rate': 0.0001, 'epochs': 100, 'patience': 9, 'dropout': 0.1, 'IMG_SIZE': 224}
+Test Accuracy :0.902376910016978
+Test Loss :0.10098524391651154
+Optimal Threshold: 0.48272645473480225
+AUC :0.9553575414198644
+PR_AUC :0.9819131186117998
+Plot Path: plots/plot_20250722_152420_33ep_8000img
+Confusion Matrix Path: ../out/plots/cm_plot_20250722_152420_33ep_8000img
+              precision    recall  f1-score   support
+
+     Not ICU     0.7874    0.9235    0.8501       353
+         ICU     0.9647    0.8933    0.9276       825
+
+    accuracy                         0.9024      1178
+   macro avg     0.8760    0.9084    0.8888      1178
+weighted avg     0.9116    0.9024    0.9044      1178
+
+-------------------SHAPLEY ANALYSIS-------------------
+Average Contribution of Images: 63.55%
+Average Contribution of Clinic Data: 36.45%
+
+Top Clinical SHAP Contributions (%):
+  procalcitonin_0.25-0.5: 8.04%
+  Acute.Kidney.Injury..during.hospitalization.: 7.86%
+  62238-1_Glomerular filtration rate/1.73 sq M.predicted [Volume Rate/Area] in Serum, Plasma or Blood by Creatinine-based formula (CKD-EPI): 6.65%
+  gender_concept_name: 5.95%
+  1988-5_C reactive protein [Mass/volume] in Serum or Plasma: 5.73%
+  59408-5_Oxygen saturation in Arterial blood by Pulse oximetry: 5.51%
+  BMI.over30: 4.12%
+  age.splits: 3.60%
+  D_dimer_500-3000: 3.30%
+  eGFR_30-60: 3.11%
+  Chloride_96-107: 2.60%
+  751-8_Neutrophils [#/volume] in Blood by Automated count: 2.59%
+  htn_v: 2.55%
+  9279-1_Respiratory rate: 2.21%
+  antibiotics_use_v: 2.02%
+  SBP_120-139: 2.02%
+  days_prior_sx: 1.92%
+  76536-2_Mean blood pressure by Noninvasive: 1.87%
+  other_lung_disease_v: 1.73%
+  Creatinine_0.5-1.2: 1.71%
+  3094-0_Urea nitrogen [Mass/volume] in Serum or Plasma: 1.69%
+  pulseOx.under90: 1.53%
+  MAP_65-90: 1.42%
+  Sodium_135-145: 1.32%
+  1920-8_Aspartate aminotransferase [Enzymatic activity/volume] in Serum or Plasma: 1.30%
+  Lymphocytes.under1k: 1.02%
+  Aspartate.over40: 1.01%
+  731-0_Lymphocytes [#/volume] in Blood by Automated count: 1.00%
+  8331-1_Oral temperature: 0.79%
+  Alanine.over60: 0.78%
+  HeartRate.over100: 0.78%
+  2524-7_Lactate [Moles/volume] in Serum or Plasma: 0.75%
+  75241-0_Procalcitonin [Mass/volume] in Serum or Plasma by Immunoassay: 0.75%
+  2951-2_Sodium [Moles/volume] in Serum or Plasma.1: 0.74%
+  1963-8_Bicarbonate [Moles/volume] in Serum or Plasma: 0.68%
+  Acute.Hepatic.Injury..during.hospitalization.: 0.64%
+  2160-0_Creatinine [Mass/volume] in Serum or Plasma: 0.59%
+  temperature.over38: 0.58%
+  Blood_Urea_Nitrogen_5-20: 0.56%
+  diarrhea_v: 0.54%
+  6598-7_Troponin T.cardiac [Mass/volume] in Serum or Plasma: 0.52%
+  2951-2_Sodium [Moles/volume] in Serum or Plasma: 0.50%
+  arb_v: 0.44%
+  BMI.over35: 0.41%
+  dm_v: 0.35%
+  abdominal_pain_v: 0.34%
+  39156-5_Body mass index (BMI) [Ratio]: 0.30%
+  dyspnea_admission_v: 0.29%
+  8480-6_Systolic blood pressure: 0.28%
+  Potassium_3.5-5.2: 0.27%
+  smoking_status_v: 0.25%
+  Troponin.above0.01: 0.25%
+  76282-3_Heart rate.beat-to-beat by EKG: 0.23%
+  cough_v: 0.19%
+  fever_v: 0.19%
+  nausea_v: 0.18%
+  Respiration.over24: 0.17%
+  2075-0_Chloride [Moles/volume] in Serum or Plasma: 0.16%
+  cad_v: 0.15%
+  33256-9_Leukocytes [#/volume] corrected for nucleated erythrocytes in Blood by Automated count: 0.14%
+  vomiting_v: 0.14%
+  ckd_v: 0.14%
+  nsaid_use_v: 0.13%
+  1744-2_Alanine aminotransferase [Enzymatic activity/volume] in Serum or Plasma by No addition of P-5'-P: 0.11%
+  2345-7_Glucose [Mass/volume] in Serum or Plasma: 0.09%
+  2823-3_Potassium [Moles/volume] in Serum or Plasma: 0.05%
+  Bicarbonate_21-31: 0.04%
+  hf_ef_v: 0.04%
+  malignancies_v: 0.04%
+  48058-2_Fibrin D-dimer DDU [Mass/volume] in Platelet poor plasma by Immunoassay: 0.03%
+  copd_v: 0.03%
+  acei_v: 0.02%
+

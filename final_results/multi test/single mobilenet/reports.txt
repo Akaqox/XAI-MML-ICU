@@ -1,0 +1,20 @@
+
+-------- New Evaluation --------
+20250627_033954
+Model Path: models/weights_20250627_033954_52ep_8000img
+Plot Path: plots/cm_plot_20250627_033954_52ep_8000img
+loss parameters: {'alpha': 0.25, 'gamma': 1.5}
+Train parameters: {'model': 'mobilenet', 'batch_size': 256, 'nb_classes': 2, 'learning_rate': 4e-05, 'epochs': 100, 'patience': 7, 'dropout': 0.1, 'IMG_SIZE': 224}
+Test Accuracy :0.853989839553833
+Test Loss :0.1364241987466812
+Optimal Threshold: 0.49716490507125854AUC :0.924536011674822
+Plot Path: plots/plot_20250627_033954_52ep_8000img
+Confusion Matrix Path: ../out/plots/cm_plot_20250627_033954_52ep_8000img
+              precision    recall  f1-score   support
+
+     Not ICU       0.72      0.87      0.78       353
+         ICU       0.94      0.85      0.89       825
+
+    accuracy                           0.86      1178
+   macro avg       0.83      0.86      0.84      1178
+weighted avg       0.87      0.86      0.86      1178

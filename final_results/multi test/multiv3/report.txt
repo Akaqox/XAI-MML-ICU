@@ -1,0 +1,100 @@
+--------------------- New Evaluation -------------------
+20250721_222543
+Model Path: models/weights_20250721_222541_52ep_8000img
+Plot Path: plots/cm_plot_20250721_222541_52ep_8000img
+loss parameters: {'alpha': 0.25, 'gamma': 1.5}
+Train parameters: {'model': 'multi', 'batch_size': 128, 'nb_classes': 2, 'learning_rate': 0.0001, 'epochs': 100, 'patience': 9, 'dropout': 0.1, 'IMG_SIZE': 224}
+Test Accuracy :0.9015280135823429
+Test Loss :0.10988807678222656
+Optimal Threshold: 0.4365556836128235
+AUC :0.9567688213580563
+PR_AUC :0.9823198396349628
+Plot Path: plots/plot_20250721_222541_52ep_8000img
+Confusion Matrix Path: ../out/plots/cm_plot_20250721_222541_52ep_8000img
+              precision    recall  f1-score   support
+
+     Not ICU     0.7842    0.9263    0.8494       353
+         ICU     0.9658    0.8909    0.9269       825
+
+    accuracy                         0.9015      1178
+   macro avg     0.8750    0.9086    0.8881      1178
+weighted avg     0.9114    0.9015    0.9036      1178
+
+-------------------SHAPLEY ANALYSIS-------------------
+Average Contribution of Images: 60.85%
+Average Contribution of Clinic Data: 39.15%
+
+Top Clinical SHAP Contributions (%):
+  59408-5_Oxygen saturation in Arterial blood by Pulse oximetry: 30.85%
+  1988-5_C reactive protein [Mass/volume] in Serum or Plasma: 11.48%
+  Acute.Kidney.Injury..during.hospitalization.: 7.48%
+  pulseOx.under90: 3.72%
+  htn_v: 3.33%
+  Aspartate.over40: 2.40%
+  9279-1_Respiratory rate: 2.24%
+  gender_concept_name: 2.05%
+  eGFR_30-60: 1.67%
+  BMI.over30: 1.65%
+  smoking_status_v: 1.63%
+  2524-7_Lactate [Moles/volume] in Serum or Plasma: 1.56%
+  1744-2_Alanine aminotransferase [Enzymatic activity/volume] in Serum or Plasma by No addition of P-5'-P: 1.40%
+  Lymphocytes.under1k: 1.35%
+  other_lung_disease_v: 1.31%
+  Blood_Urea_Nitrogen_5-20: 1.24%
+  Chloride_96-107: 1.23%
+  antibiotics_use_v: 1.19%
+  2345-7_Glucose [Mass/volume] in Serum or Plasma: 1.17%
+  731-0_Lymphocytes [#/volume] in Blood by Automated count: 1.15%
+  Sodium_135-145: 1.10%
+  8331-1_Oral temperature: 1.09%
+  temperature.over38: 1.04%
+  D_dimer_500-3000: 0.95%
+  2160-0_Creatinine [Mass/volume] in Serum or Plasma: 0.90%
+  days_prior_sx: 0.85%
+  cad_v: 0.84%
+  procalcitonin_0.25-0.5: 0.78%
+  76282-3_Heart rate.beat-to-beat by EKG: 0.76%
+  age.splits: 0.69%
+  1963-8_Bicarbonate [Moles/volume] in Serum or Plasma: 0.65%
+  Creatinine_0.5-1.2: 0.54%
+  acei_v: 0.54%
+  33256-9_Leukocytes [#/volume] corrected for nucleated erythrocytes in Blood by Automated count: 0.54%
+  62238-1_Glomerular filtration rate/1.73 sq M.predicted [Volume Rate/Area] in Serum, Plasma or Blood by Creatinine-based formula (CKD-EPI): 0.52%
+  dm_v: 0.50%
+  Alanine.over60: 0.48%
+  2823-3_Potassium [Moles/volume] in Serum or Plasma: 0.48%
+  Bicarbonate_21-31: 0.43%
+  Acute.Hepatic.Injury..during.hospitalization.: 0.42%
+  diarrhea_v: 0.40%
+  39156-5_Body mass index (BMI) [Ratio]: 0.39%
+  751-8_Neutrophils [#/volume] in Blood by Automated count: 0.38%
+  arb_v: 0.37%
+  BMI.over35: 0.34%
+  6598-7_Troponin T.cardiac [Mass/volume] in Serum or Plasma: 0.34%
+  vomiting_v: 0.33%
+  abdominal_pain_v: 0.33%
+  76536-2_Mean blood pressure by Noninvasive: 0.32%
+  1920-8_Aspartate aminotransferase [Enzymatic activity/volume] in Serum or Plasma: 0.28%
+  dyspnea_admission_v: 0.27%
+  fever_v: 0.27%
+  Respiration.over24: 0.23%
+  MAP_65-90: 0.20%
+  2951-2_Sodium [Moles/volume] in Serum or Plasma: 0.18%
+  Troponin.above0.01: 0.17%
+  Potassium_3.5-5.2: 0.14%
+  2951-2_Sodium [Moles/volume] in Serum or Plasma.1: 0.08%
+  3094-0_Urea nitrogen [Mass/volume] in Serum or Plasma: 0.08%
+  HeartRate.over100: 0.08%
+  cough_v: 0.08%
+  hf_ef_v: 0.08%
+  75241-0_Procalcitonin [Mass/volume] in Serum or Plasma by Immunoassay: 0.07%
+  8480-6_Systolic blood pressure: 0.06%
+  nsaid_use_v: 0.05%
+  ckd_v: 0.05%
+  copd_v: 0.05%
+  48058-2_Fibrin D-dimer DDU [Mass/volume] in Platelet poor plasma by Immunoassay: 0.04%
+  nausea_v: 0.04%
+  malignancies_v: 0.03%
+  SBP_120-139: 0.03%
+  2075-0_Chloride [Moles/volume] in Serum or Plasma: 0.02%
+

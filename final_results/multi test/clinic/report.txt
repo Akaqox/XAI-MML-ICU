@@ -1,0 +1,25 @@
+
+--------------------- New Evaluation -------------------
+20250708_005935
+Model Path: models/weights_20250708_005935_32ep_8000img
+Plot Path: plots/cm_plot_20250708_005935_32ep_8000img
+loss parameters: {'alpha': 0.25, 'gamma': 1.5}
+Train parameters: {'model': 'clinic', 'batch_size': 64, 'nb_classes': 2, 'learning_rate': 4e-05, 'epochs': 100, 'patience': 9, 'dropout': 0.1, 'IMG_SIZE': 224}
+Test Accuracy :0.8471986417657046
+Test Loss :0.17159207165241241
+Optimal Threshold: 0.4639708697795868AUC :0.8582916988582712
+Plot Path: plots/plot_20250708_005935_32ep_8000img
+Confusion Matrix Path: ../out/plots/cm_plot_20250708_005935_32ep_8000img
+              precision    recall  f1-score   support
+
+     Not ICU     0.7598    0.7167    0.7376       353
+         ICU     0.8817    0.9030    0.8922       825
+
+    accuracy                         0.8472      1178
+   macro avg     0.8207    0.8099    0.8149      1178
+weighted avg     0.8451    0.8472    0.8459      1178
+
+-------------------SHAPLEY ANALYSIS-------------------
+Average Contribution of Images: 0.00%
+Average Contribution of Clinic Data: 0.00%
+

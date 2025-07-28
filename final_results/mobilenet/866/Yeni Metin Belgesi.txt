@@ -1,0 +1,20 @@
+
+-------- New Evaluation --------
+Model Path: models/weights_20240727_214120_30ep_8000img
+Plot Path: ../out/plots/plot_20240727_214120_30ep_8000img
+loss parameters: {'alpha': 0.71, 'gamma': 1.81}
+Train parameters: {'model': 'mobilenet', 'batch_size': 128, 'nb_classes': 2, 'learning_rate': 1e-05, 'epochs': 150, 'patience': 7, 'dropout': 0.1}
+Test Accuracy :0.8667232394218445
+Test Loss :0.09714733809232712
+Test Sensitivity :0.8860606060606061
+Test Specificity :0.8215297450424929
+Plot Path: ../out/plots/plot_20240727_214120_30ep_8000img
+Confusion Matrix Path: ../out/plots/confusion-matrix-20240727_214123_30ep_8000img.png
+              precision    recall  f1-score   support
+
+     Not ICU       0.76      0.82      0.79       353
+         ICU       0.92      0.89      0.90       825
+
+    accuracy                           0.87      1178
+   macro avg       0.84      0.85      0.85      1178
+weighted avg       0.87      0.87      0.87      1178
