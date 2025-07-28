@@ -114,6 +114,7 @@ Salih Kızılışık, Sema Candemir are with the Artificial Intelligence in
 Healthcare Laboratory, Computer Engineering Department, Eskişehir Tech-
 nical University, Eskişehir, TURKEY e-mail: salihk@ogr.eskisehir.edu.tr,
 semacandemir@eskisehir.edu.tr
+
 Corresponding author:SemaCandemir
 (e-mail:semacandemir@eskisehir.edu.tr).
 
