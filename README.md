@@ -1,11 +1,11 @@
-# ICU-MML-XAI: Explainable Multimodal Machine Learning for ICU Admission Prediction
+# XAI-MML-ICU: Explainable Multimodal Machine Learning for ICU Admission Prediction
 This repository contains the experimental codebase for the research paper:
 
 "Explainable Multimodal Machine Learning Model for Predicting Intensive Care Unit Admission"
 by S.Kizilisik, A.Terzi, M.Koc and S.Candemir
 
 **📄 Abstract**
-Timely prediction of Intensive Care Unit (ICU) admission is crucial for optimizing clinical decision-making and resource management, especially in high-pressure healthcare settings. This study investigates the effectiveness of a multimodal machine learning framework that integrates imaging data and clinical data—including vital signs, laboratory results, and co-morbidities—to predict the ICU requirement of COVID-19 patients at the time of hospital admission. Utilizing a publicly available dataset, we implemented a pipeline that includes lung region segmentation, data preprocessing and augmentation, and feature learning via a pre-trained convolutional neural network architecture. The multimodal model, trained with focal loss to address class imbalance, achieved an area under the receiver operating characteristic curve of 0.93. To interpret the model’s decision, we used Gradient-weighted Class Activation Mapping to visualize salient lung regions and SHapley Additive exPlanations to assess the individual importance of clinical features. The most influential predictors included C-reactive protein, creatinine, eGFR, glucose, and symptom duration, consistent with findings from correlation analysis. The results validate the clinical relevance of our approach, which offers a transparent and effective tool for early ICU risk stratification using data commonly available upon admission.
+Timely prediction of Intensive Care Unit (ICU) admission is crucial for optimizing clinical decision-making and resource management, especially in high-pressure healthcare settings. This study investigates the effectiveness of a multimodal machine learning framework that integrates imaging data and clinical data—including vital signs, laboratory results, and co-morbidities—to predict the ICU requirement of COVID-19 patients at the time of hospital admission. Utilizing a publicly available dataset, we implemented a pipeline that includes lung region segmentation, data preprocessing and augmentation, and feature learning via a pre-trained convolutional neural network architecture. The multimodal model, trained with focal loss to address class imbalance, achieved an area under the receiver operating characteristic curve of 0.96. To interpret the model’s decision, we used Gradient-weighted Class Activation Mapping to visualize salient lung regions and SHapley Additive exPlanations to assess the individual importance of clinical features. The most influential predictors included C-reactive protein, creatinine, eGFR, glucose, and symptom duration, consistent with findings from correlation analysis. The results validate the clinical relevance of our approach, which offers a transparent and effective tool for early ICU risk stratification using data commonly available upon admission.
 
 **✨ Key Features & Methodology**
 * **Multimodal Data Fusion:** Fusion of imaging data (Chest X-rays) and diverse clinical data (vital signs, lab results, co-morbidities).
@@ -111,8 +111,7 @@ This code is provided for research purposes only. If you use any part of this co
 
 # ✉️ Contact
 Salih Kızılışık, Sema Candemir are with the Artificial Intelligence in
-Healthcare Laboratory, Computer Engineering Department, Eskişehir Tech-
-nical University, Eskişehir, TURKEY e-mail: salihk@ogr.eskisehir.edu.tr,
+Healthcare Laboratory, Computer Engineering Department, Eskisehir Technical University, Eskişehir, TURKEY e-mail: salihk@ogr.eskisehir.edu.tr,
 semacandemir@eskisehir.edu.tr
 
 Corresponding author:SemaCandemir
