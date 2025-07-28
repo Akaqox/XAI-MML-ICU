@@ -4,8 +4,14 @@ This repository contains the experimental codebase for the research paper:
 "Explainable Multimodal Machine Learning Model for Predicting Intensive Care Unit Admission"
 by S.Kizilisik, A.Terzi, M.Koc and S.Candemir
 
+---
+
+
 **📄 Abstract**
 Timely prediction of Intensive Care Unit (ICU) admission is crucial for optimizing clinical decision-making and resource management, especially in high-pressure healthcare settings. This study investigates the effectiveness of a multimodal machine learning framework that integrates imaging data and clinical data—including vital signs, laboratory results, and co-morbidities—to predict the ICU requirement of COVID-19 patients at the time of hospital admission. Utilizing a publicly available dataset, we implemented a pipeline that includes lung region segmentation, data preprocessing and augmentation, and feature learning via a pre-trained convolutional neural network architecture. The multimodal model, trained with focal loss to address class imbalance, achieved an area under the receiver operating characteristic curve of 0.96. To interpret the model’s decision, we used Gradient-weighted Class Activation Mapping to visualize salient lung regions and SHapley Additive exPlanations to assess the individual importance of clinical features. The most influential predictors included C-reactive protein, creatinine, eGFR, glucose, and symptom duration, consistent with findings from correlation analysis. The results validate the clinical relevance of our approach, which offers a transparent and effective tool for early ICU risk stratification using data commonly available upon admission.
+
+---
+
 
 **✨ Key Features & Methodology**
 * **Multimodal Data Fusion:** Fusion of imaging data (Chest X-rays) and diverse clinical data (vital signs, lab results, co-morbidities).
@@ -13,6 +19,13 @@ Timely prediction of Intensive Care Unit (ICU) admission is crucial for optimizi
 * **Robust Data Augmentation:** Techniques to enhance dataset diversity and model generalization.
 * **Feature Learning:** Extracts powerful features from imaging data using the pre-trained **MobileNetV3Small Convolutional Neural Network (CNN) architecture**, specifically chosen for its efficiency, mobility, and portability.
 * **Class Imbalance Handling:** Employs Focal Loss during training to effectively address imbalanced datasets, common in medical prediction tasks.
+  
+<!-- Full-width image in its own row -->
+<div style="text-align: center; margin-top: 20px;">
+  <img src="final_results/architecture.png" style="width: 100%; height: auto;" />
+</div>
+---
+
 
 **💡 Explainable AI (XAI):**
 
@@ -22,8 +35,54 @@ Timely prediction of Intensive Care Unit (ICU) admission is crucial for optimizi
 
 * **Key Predictor Identification:** Identifies clinically relevant features such as C-reactive protein, creatinine, Sodium, glucose, and symptom duration as influential predictors.
 
+<!-- Final row: 2 images side by side, height 500px -->
+<div style="display: flex; gap: 10px; justify-content: center;">
+  <img src="final_results/grad_multiple.png" height="460px" />
+  <img src="final_results/Shapley2.png" height="400px" />
+</div>
+
 # 🚀 Performance
-The multimodal model achieved an Area Under the Receiver Operating Characteristic Curve (AUC) of 0.96, demonstrating strong predictive capabilities for ICU admission.
+## CXR Model
+
+<div style="display: flex; gap: 10px; align-items: center;">
+  <img src="final_results/multi%20test/mobilenetv3/plot_20250721_201000_100ep_8000img.png" height="250px" />
+  <img src="final_results/multi%20test/mobilenetv3/roc_prec_recall_20250721_201000_100ep_8000img.png" height="250px" />
+  <img src="final_results/multi%20test/mobilenetv3/cm_plot_20250721_201000_100ep_8000imgimg.png" height="250px" />
+</div>
+
+---
+
+## Clinic Model
+
+<div style="display: flex; gap: 10px; align-items: center;">
+  <img src="final_results/multi%20test/clinicv2/plot_20250721_132211_48ep_8000img.png" height="250px" />
+  <img src="final_results/multi%20test/clinicv2/roc_prec_recall_20250721_132211_48ep_8000img.png" height="250px" />
+  <img src="final_results/multi%20test/clinicv2/cm_plot_20250721_132211_48ep_8000imgimg.png" height="250px" />
+</div>
+
+---
+
+## Multimodal Fused Approach
+
+<!-- First row: 3 images side by side -->
+<div style="display: flex; gap: 10px; justify-content: center; margin-bottom: 20px;">
+  <img src="final_results/multi%20test/multiv4/plot_20250722_152420_33ep_8000img.png" height="250px" />
+  <img src="final_results/multi%20test/multiv4/roc_prec_recall_20250722_152420_33ep_8000img.png" height="250px" />
+  <img src="final_results/multi%20test/multiv4/cm_plot_20250722_152420_33ep_8000imgimg.png" height="250px" />
+</div>
+
+
+
+---
+
+## Comparison Table
+
+| Model                       | Accuracy | Precision | Recall |   F1   |   AUC   |    Score Notes     |
+|-----------------------------|----------|-----------|--------|--------|---------|--------------------|
+| CXR Model(MobilenetV3 Small)| 0.875     | 0.847      | 0.871   | 0.857   | 0.929    |Baseline image-only |
+| Clinic Model                | 0.807     | 0.771      | 0.792   | 0.779   | 0.866    |Clinical data only  |
+| Multimodal Model            | 0.902     | 0.875      | 0.909   | 0.888   | 0.957    |Fusion of both data |
+
 
 # 🛠️ Getting Started
 Prerequisites can be found in env_backup.yaml file
@@ -40,9 +99,12 @@ cd ICU-MML-XAI
 Install dependencies:
 It is highly recommended to use a virtual environment such as conda.
 ```
-python -m venv venv
-source venv/bin/activate  # On Windows: `venv\Scripts\activate`
-pip install -r requirements.txt # (Assuming you will create this file with all necessary libraries)
+
+conda update -n base -c defaults conda
+conda env create -f env_backup.yaml -n YOUR_ENV_NAME
+conda activate YOUR_ENV_NAME
+
+
 ```
 **Configuration:**
 The project uses a config.json file for hyperparameters and paths. Ensure you review and update config["paths"]["PATH"] and other relevant settings before running.
