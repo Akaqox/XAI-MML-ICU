@@ -34,9 +34,21 @@ Timely prediction of Intensive Care Unit (ICU) admission is crucial for optimizi
 
 * **Key Predictor Identification:** Identifies clinically relevant features such as C-reactive protein, creatinine, Sodium, glucose, and symptom duration as influential predictors.
 
-<div align="center" style="gap: 10px; ">
-  <img src="final_results/grad_multiple.png" style="width: 70%; height: auto;" />
-  <img src="final_results/Shapley2.png" style="width: 70%; height: auto;" />
+
+
+<div align="center" style="display: inline-block;">
+  <div style="width: 45%;">
+    <img src="final_results/grad_multiple.png" width="75%" />
+    <p align="center"><em>Figure: Grad-CAM visualizations of individual chest X-ray in test dataset. Subfigures (a–d) show correctly classified discharged patients with low ICU admission
+probabilities (0.06, 0.16, 0.18, and 0.28, respectively). Minimal activation is observed in the lung regions, indicating absence of pathological findings. Subfigure
+(d) includes visible medical equipment, which may have slightly influenced the model’s ICU admission probability towards 0.28. Subfigures (e–h) correspond
+to correctly classified ICU-admitted patients, with ICU prediction probabilities (0.74, 0.75, 0.80, and 0.93, respectively). These heatmaps show prominent
+activations in the lung areas, suggesting the model bases its decisions primarily on pulmonary pathology.</em></p>
+  </div>
+  
+  ---
+  
+  <img src="final_results/Shapley2.png" width="75%" />
 </div>
 
 # 🚀 Performance
