@@ -20,11 +20,10 @@ Timely prediction of Intensive Care Unit (ICU) admission is crucial for optimizi
 * **Feature Learning:** Extracts powerful features from imaging data using the pre-trained **MobileNetV3Small Convolutional Neural Network (CNN) architecture**, specifically chosen for its efficiency, mobility, and portability.
 * **Class Imbalance Handling:** Employs Focal Loss during training to effectively address imbalanced datasets, common in medical prediction tasks.
   
-<!-- Full-width image in its own row -->
-<div style="text-align: center; margin-top: 20px;">
-  <img src="final_results/multimodal_arch.png" style="width: 100%; height: auto;" />
+<div align="center">
+  <img src="final_results/multimodal_arch.png" width="70%" />
 </div>
----
+
 
 
 **💡 Explainable AI (XAI):**
@@ -35,52 +34,48 @@ Timely prediction of Intensive Care Unit (ICU) admission is crucial for optimizi
 
 * **Key Predictor Identification:** Identifies clinically relevant features such as C-reactive protein, creatinine, Sodium, glucose, and symptom duration as influential predictors.
 
-<div style="display: flex; gap: 10px; justify-content: center;">
-  <img src="final_results/grad_multiple.png" style="width: 100%; height: auto;" />
-  <img src="final_results/Shapley2.png" style="width: 100%; height: auto;" />
+<div align="center" style="gap: 10px; ">
+  <img src="final_results/grad_multiple.png" style="width: 70%; height: auto;" />
+  <img src="final_results/Shapley2.png" style="width: 70%; height: auto;" />
 </div>
 
 # 🚀 Performance
 ## CXR Model
 
-<div style="display: flex; gap: 10px; width: 100%; align-items: center; flex-wrap: nowrap; overflow-x: auto;">
-  <img src="final_results/multi%20test/mobilenetv3/plot_20250721_201000_100ep_8000img.png" height="500px" />
-  <img src="final_results/multi%20test/mobilenetv3/roc_prec_recall_20250721_201000_100ep_8000img.png" height="410px" />
-  <img src="final_results/multi%20test/mobilenetv3/cm_plot_20250721_201000_100ep_8000imgimg.png" height="410px" />
+<div align="center" style="display: flex; gap: 10px; width: 60%; align-items: center; flex-wrap: nowrap; overflow-x: auto;">
+  <img src="final_results/multi%20test/mobilenetv3/plot_20250721_201000_100ep_8000img.png" style="width: 44%; height: auto; margin:auto;" />
+  <img src="final_results/multi%20test/mobilenetv3/roc_prec_recall_20250721_201000_100ep_8000img.png" style="width: 22%; height: auto; margin:auto;" />
+  <img src="final_results/multi%20test/mobilenetv3/cm_plot_20250721_201000_100ep_8000imgimg.png" style="width: 22%; height: auto; margin:auto;" />
 </div>
----
 
 ## Clinic Model
 
-<div style="display: flex; gap: 10px; align-items: center;">
-  <img src="final_results/multi%20test/clinicv2/plot_20250721_132211_48ep_8000img.png" height="500px" />
-  <img src="final_results/multi%20test/clinicv2/roc_prec_recall_20250721_132211_48ep_8000img.png" height="410px" />
-  <img src="final_results/multi%20test/clinicv2/cm_plot_20250721_132211_48ep_8000imgimg.png" height="410px" />
+<div align="center" style="display: flex; gap: 10px; align-items: center;">
+  <img src="final_results/multi%20test/clinicv2/plot_20250721_132211_48ep_8000img.png"  style="width: 44%; height: auto; margin:auto;" />
+  <img src="final_results/multi%20test/clinicv2/roc_prec_recall_20250721_132211_48ep_8000img.png"  style="width: 22%; height: auto; margin:auto;" />
+  <img src="final_results/multi%20test/clinicv2/cm_plot_20250721_132211_48ep_8000imgimg.png"  style="width: 22%; height: auto; margin:auto;" />
 </div>
-
----
 
 ## Multimodal Fused Approach
 
 <!-- First row: 3 images side by side -->
-<div style="display: flex; gap: 10px; justify-content: center; margin-bottom: 20px;">
-  <img src="final_results/multi%20test/multiv4/plot_20250722_152420_33ep_8000img.png" height="500px" />
-  <img src="final_results/multi%20test/multiv4/roc_prec_recall_20250722_152420_33ep_8000img.png" height="410px" />
-  <img src="final_results/multi%20test/multiv4/cm_plot_20250722_152420_33ep_8000imgimg.png" height="410*px" />
+<div align="center" style="display: flex; gap: 10px; justify-content: center; margin-bottom: 20px;">
+  <img src="final_results/multi%20test/multiv4/plot_20250722_152420_33ep_8000img.png" style="width: 44%; height: auto; margin:auto;" />
+  <img src="final_results/multi%20test/multiv4/roc_prec_recall_20250722_152420_33ep_8000img.png" style="width: 22%; height: auto; margin:auto;"/>
+  <img src="final_results/multi%20test/multiv4/cm_plot_20250722_152420_33ep_8000imgimg.png" style="width: 22%; height: auto; margin:auto;" />
 </div>
 
 
 
 ---
 
-## Comparison Table
+## Performance Comparison Table
 
 | Model                       | Accuracy | Precision | Recall |   F1   |   AUC   |    Score Notes     |
 |-----------------------------|----------|-----------|--------|--------|---------|--------------------|
 | CXR Model(MobilenetV3 Small)| 0.875     | 0.847      | 0.871   | 0.857   | 0.929    |Baseline image-only |
 | Clinic Model                | 0.807     | 0.771      | 0.792   | 0.779   | 0.866    |Clinical data only  |
 | Multimodal Model            | 0.902     | 0.875      | 0.909   | 0.888   | 0.957    |Fusion of both data |
-
 ---
 
 # 🛠️ Getting Started
