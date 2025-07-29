@@ -22,7 +22,7 @@ Timely prediction of Intensive Care Unit (ICU) admission is crucial for optimizi
   
 <!-- Full-width image in its own row -->
 <div style="text-align: center; margin-top: 20px;">
-  <img src="final_results/architecture.png" style="width: 100%; height: auto;" />
+  <img src="final_results/multimodal_arch.png" style="width: 100%; height: auto;" />
 </div>
 ---
 
