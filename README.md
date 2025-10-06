@@ -48,7 +48,7 @@ activations in the lung areas, suggesting the model bases its decisions primaril
   
   ---
   
-  <img src="final_results/Shapley2.png" width="75%" />
+  <img src="final_results/Shapley.png" width="75%" />
 </div>
 
 # 🚀 Performance
