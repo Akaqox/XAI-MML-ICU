@@ -8,7 +8,7 @@
             "construct_dataset": 0,
             "construct_val_test": 0,
             "train": 1,
-            "visualization_on": 1,
+            "visualization_on": 0,
             "segmentation_on": 0,
             "search":0,
             "create_feature":0,

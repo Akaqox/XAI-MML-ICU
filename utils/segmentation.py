@@ -9,6 +9,7 @@ import os
 import matplotlib.pyplot as plt
 import numpy as np
 
+from skimage import exposure
 from scipy.ndimage import median_filter, gaussian_filter
 import cv2
 import glob
@@ -19,6 +20,7 @@ paths = config["paths"]
 
 process_size = (224,224) 
 visualization = config["runningConfig"]["visualization_on"]
+        
 class Segment():
     def __init__(self):
         self.seg_model = loadSegmentModel()
@@ -33,84 +35,109 @@ class Segment():
         
         create_destroy_dic(path_segmented + "/0")
         create_destroy_dic(path_segmented + "/1")
-        for i ,npy_list in enumerate(lists):
-            
-            print("Segmentation started")
+        
+        for i, npy_list in enumerate(lists):
+            print(f"Segmentation started for class {i}")
             self.cropAll(npy_list, i, path_segmented)
             print("Segmentation finished")
             
     def cropAll(self, npy_list, i, save_path, dicom=False):
         for npy_path in npy_list:
-            #define the image
+            
+            # 1. Define/Load the image
             if dicom == False:
                 npy = np.load(npy_path)
-                img = npy[0, : ,: , 0]
+                # Handle potential shape mismatch (e.g. if npy is (1, H, W, 1))
+                if len(npy.shape) == 4:
+                    img = npy[0, :, :, 0]
+                elif len(npy.shape) == 3:
+                    img = npy[0, :, :]
+                else:
+                    img = npy
             else:
                 img = readXray(npy_path)
     
-            # if rgb, convert to grayscale
-            if(len(img.shape) == 3): 
+            # If rgb/channel dim exists, convert to grayscale 2D
+            if len(img.shape) == 3: 
                 img = img[:,:,0]
             
+            # 2. Create Mask
             mask = self.makeMask(img)
             
+            # --- VISUALIZATION FIX PART 1 ---
+            # Use a non-blocking check for your custom show_segment function
+            # (Ensure utils.show_segment does not contain plt.show() either)
             if visualization:
                 show_segment(img, mask)
+
     
+            # 3. Crop and Resize
             img = cropImg(img, mask)
             img = cv2.resize(img, process_size)
      
-            # print(np.amax(img))
-            # print(np.amin(img))
-            
+            # --- VISUALIZATION FIX PART 2 ---
             if visualization:
+                plt.figure(figsize=(3, 5))
                 plt.imshow(img, cmap=plt.cm.gray)
+                plt.title(os.path.basename(npy_path))
+                plt.axis('off')
+                
+                # Instead of plt.show(), use pause so code continues
                 plt.show()
-                plt.clf()
-            basename = os.path.basename(npy_path)
-            basename = basename.split(".")[0]
-            save = save_path + "/"+ str(i) + "/" + basename
-            np.save(save, img)
             
-        
+            # 4. Save
+            basename = os.path.basename(npy_path)
+            if len(basename) < 10:
+                basename = basename.split(".")[0]
+            
+            
+            save = save_path + "/" + str(i) + "/" + str(basename)
+            print(save)
+            np.save(save, img)
+            #print(save)
+            
+            
+            
     def makeMask(self, img):
-    
+        # Create a copy so we don't modify the original image used for cropping later
+        img_proc = img.copy()
+        
         # if rgb, convert to grayscale
-        if(len(img.shape) == 3): 
-            img = img[:,:,0]
+        if len(img_proc.shape) == 3: 
+            img_proc = img_proc[:,:,0]
     
         # histogram equalization
-        img = exposure.equalize_hist(img)
-        img = median_filter(img, size=3)  # 3x3 median filter (you can adjust the filter size)
-        # Sharpening (Gaussian filter)
-        img = gaussian_filter(img, sigma=1)  # Adjust the sigma parameter for the desired sharpness
-        # # Normalize
-        img -= img.mean()
-        img /= img.std()
-    
-        mask = segmentLung(self.seg_model, img)
+        img_proc = exposure.equalize_hist(img_proc)
+        img_proc = median_filter(img_proc, size=3) 
+        img_proc = gaussian_filter(img_proc, sigma=1)
         
-        # Assuming `mask` is a numpy array representing your binary image
-        mask = mask.astype(np.uint8)
+        # Normalize
+        if img_proc.std() != 0:
+            img_proc -= img_proc.mean()
+            img_proc /= img_proc.std()
     
-        # Step 1: Label objects
+        mask = segmentLung(self.seg_model, img_proc)
+        
+        # Ensure mask is binary uint8
+        mask = (mask > 0.5).astype(np.uint8) if mask.max() <= 1.0 else mask.astype(np.uint8)
+    
+        # Label objects
         num_labels, labels = cv2.connectedComponents(mask)
     
-        # Step 2: Calculate object sizes
-        object_sizes = np.bincount(labels.flatten())
-    
-        # Step 3: Select largest two objects
-        largest_objects_indices = np.argsort(object_sizes)[::-1][1:3]  # Indices of largest two objects
-    
-        # Step 4: Create a mask for the largest objects
-        largest_objects_mask = np.isin(labels, largest_objects_indices)
-    
-        # Step 5: Apply the mask to the original image
-        result_image = mask.copy()
-        result_image[~largest_objects_mask] = 0  # Keep only the largest objects, set others to 0
-    
-        # If you want to keep `mask` variable updated as well, do:
-        mask[~largest_objects_mask] = 0
+        # Calculate object sizes
+        if num_labels > 1:
+            object_sizes = np.bincount(labels.flatten())
+            # Ignore background (label 0) and get largest 2
+            object_sizes[0] = 0 
+            
+            # Select largest two objects
+            largest_objects_indices = np.argsort(object_sizes)[::-1][:2]
+            
+            # Create a mask for the largest objects
+            largest_objects_mask = np.isin(labels, largest_objects_indices)
+            
+            # Apply filter
+            mask[~largest_objects_mask] = 0
         
         return mask
 

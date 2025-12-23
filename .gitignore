@@ -7,7 +7,7 @@ for_overleaf
 results/
 .spyproject/
 accuracy_tuner/
-
+debug_plots/
 # Ignore all files by default
 **/__pycache__/    # Exclude all '__pycache__' folders at any depth
 *__pycache__/

@@ -144,18 +144,59 @@ def segmentLung(seg_model, img):
 
 
 def loadSegmentModel():
-
-    " load lung segment model and weights... (model U-net) " 
-    json_file = open('model/segment_model.json', 'r') 
-    loaded_model_json = json_file.read() 
-    json_file.close() 
-    model = model_from_json(loaded_model_json)
-        
-    " load weights into the model " 
-    model.load_weights('model/segment_model.h5') 
-    print("Loaded model from disk")
+    """
+    Robust loader that handles:
+    1. Legacy split format (JSON architecture + H5 weights)
+    2. Modern full-model format (H5 or Keras file)
+    """
     
-    return model
+    # PATHS
+    path_json = 'model/segment_model.json'
+    path_weights = 'model/segment_model.h5'
+    path_full_model = 'model/segment_model.h5' # Often full models use the same name
+    
+    # --- ATTEMPT 1: Legacy (JSON + Weights) ---
+    try:
+        if os.path.exists(path_json):
+            print("Found JSON architecture. Attempting legacy load...")
+            
+            with open(path_json, 'r') as json_file:
+                loaded_model_json = json_file.read()
+            
+            # Create model from JSON
+            model = model_from_json(loaded_model_json)
+            
+            # Load weights
+            if os.path.exists(path_weights):
+                model.load_weights(path_weights)
+                print("Success: Loaded legacy model (JSON + Weights)")
+                return model
+            else:
+                print(f"Warning: JSON found but weights file ({path_weights}) is missing.")
+    
+    except Exception as e:
+        print(f"Legacy load failed ({e}). This is expected in newer TF versions.")
+
+    # --- ATTEMPT 2: Modern (Full Model Load) ---
+    print("Attempting to load as a full Keras model...")
+    try:
+        # Try loading the .h5 file directly as a full model
+        if os.path.exists(path_full_model):
+            model = load_model(path_full_model)
+            print(f"Success: Loaded full model from {path_full_model}")
+            return model
+            
+        # Optional: Check for .keras format (newer standard)
+        path_keras = 'model/segment_model.keras'
+        if os.path.exists(path_keras):
+            model = load_model(path_keras)
+            print(f"Success: Loaded full model from {path_keras}")
+            return model
+            
+    except Exception as e:
+        print(f"Full model load failed: {e}")
+
+    raise RuntimeError("Could not load segmentation model. Ensure 'model/segment_model.h5' is a valid Keras model.")
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -401,39 +442,48 @@ def draw_rectangle(img, mask):
     return img
 
 def show_segment(img, pred):
+    # --- STEP 1: Standardize to 0-255 (uint8) ---
     img = img.astype('float32')
-    # bound it between 0 and 1
-    img /= 4096
-    mpl.rcParams['figure.dpi'] = 420
     
+    img -= img.min()
+    img /= (img.max() - img.min())
     
-    " show predicted results "
-    plt.subplot(141)
+    # Now scale comfortably to 0-255 integers
+    # This prevents "blank" images caused by float values being interpreted as 0
+    img_disp = (img * 255).astype(np.uint8)
+    
+    # Setup Figure
+    mpl.rcParams['figure.dpi'] = 150 
+    plt.figure(figsize=(5,5))
+    
+    # 1. Original Image
+    plt.subplot(131)
     plt.axis('off')
-    plt.imshow(img, cmap=plt.cm.gray)
+    plt.imshow(img_disp, cmap=plt.cm.gray)
+    plt.title("Original")
     
+    # 2. Mask
+    plt.subplot(132)
+    plt.axis('off')
+    plt.imshow(pred, cmap='jet')
+    plt.title("Mask")
+
+    # 3. Crop Area
+    # We pass the uint8 image to draw_rectangle. 
+    # This ensures OpenCV functions inside it see values 0-255, not 0-1.
+    try:
+        img_rect = draw_rectangle(img_disp.copy(), pred)
+        plt.subplot(133)
+        plt.axis('off')
+        plt.imshow(img_rect, cmap=plt.cm.gray)
+        plt.title("Crop Area")
+    except Exception as e:
+        print(f"Drawing rectangle failed: {e}")
+
+    # --- STEP 2: Non-Blocking Render ---
+    plt.show()
     
-    plt.subplot(142)
-    plt.axis('off')
-    plt.imshow(pred,cmap='jet')  
-
-
-    " draw rectangle... "
-    img = draw_rectangle(img, pred)
-    plt.subplot(143)
-    plt.axis('off')
-    plt.imshow(img)  
-
-    # " draw rectangle... "
-    # pred_img = draw_rectangle(pred, pred)
-    # plt.subplot(144)
-    # plt.title('ProcessArea', fontsize = 10)
-    # plt.axis('off')
-    # plt.imshow(pred_img) 
-    plt.show()  
-    plt.clf()
     return
-
 
    
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -507,10 +557,10 @@ def normalize(npy):
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 def create_destroy_dic(path):
     if (not os.path.isdir(path)):
-        os.mkdir(path)
+        os.makedirs(path, exist_ok=True)
     else:
         shutil.rmtree(path)
-        os.mkdir(path)
+        os.makedirs(path, exist_ok=True)
         
 def save_numpy(data ,path ,i = None):
         if i == None:
