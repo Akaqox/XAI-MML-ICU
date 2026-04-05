@@ -21,46 +21,47 @@ from utils.metrics import f1_score
 
 def VGG16_Multi(weights='imagenet', hp = None):
     with custom_object_scope({"f1_score": f1_score}):
-        base_model = tf.keras.models.load_model('model/fine_tune.keras')
+        base_model = tf.keras.models.load_model('model/cnn_170824.keras')
     
-    # Extract only the convolutional base (excluding the last 3 layers)
+    # Extract only the convolutional base
     cnn_part = tf.keras.Model(inputs=base_model.input, outputs=base_model.layers[-7].output)
      
     # Freeze the CNN layers (optional)
     for layer in cnn_part.layers:
         layer.trainable = False
-    # Define the primary image input
-    image_input = cnn_part.input  # This will be (224, 224, 3)
 
-    # Define the additional input (e.g., mask input)
-    tabular_input = Input(shape=(72,), dtype="float32", name="tabular_input")
+    image_input = cnn_part.input  
+    tabular_input = Input(shape=(69,), dtype="float32", name="tabular_input")
 
-    # Process image input through the base model
-    x = cnn_part.output
+    # CNN Branch
+    cnn_x = Flatten()(cnn_part.output)
+
+    # Tabular Branch (Intermediate Encoder)
+    # Projects the 69 features into a higher-dimensional space to balance with image features
+    tab_x = Flatten()(tabular_input)
+    tab_x = Dense(units=256, activation="relu")(tab_x)
+    tab_x = BatchNormalization()(tab_x)
     
-    x = Flatten()(x)
-    
-    # x = Dense(units=128, activation="relu")(x)
-    tabular_input = Flatten()(tabular_input)
-    x = Concatenate(axis=-1)([x, tabular_input])
+    # Fusion
+    x = Concatenate(axis=-1)([cnn_x, tab_x])
     x = BatchNormalization()(x)
+    
+    # Smoother Bottleneck
+    x = Dense(units=256, activation="relu")(x)
+    x = Dropout(0.2)(x)
+    x = Dense(units=128, activation="relu")(x)
     x = Dropout(0.1)(x)
     x = Dense(units=64, activation="relu")(x)
-    x = Dropout(0.1)(x)
-    x = Dense(units=64, activation="relu")(x)
+    
     output = Dense(units=1, activation="sigmoid")(x)
 
-    # Define the complete model
     model = Model(inputs=[image_input, tabular_input], outputs=output)
-
-    # Print summary
-    model.summary()
     
     return model
 
 def clinic_model(hp = None):
     # Define the additional input (e.g., mask input)
-    tabular_input = Input(shape=(72,), dtype="float32", name="mask_input")
+    tabular_input = Input(shape=(69,), dtype="float32", name="mask_input")
     x = BatchNormalization()(tabular_input)
     x = Dropout(0.3)(x)
     x = Dense(units=32, activation="relu")(tabular_input)
@@ -69,6 +70,7 @@ def clinic_model(hp = None):
     output = Dense(units=1, activation="sigmoid")(x)
     # Define the complete model
     model = Model(inputs=tabular_input, outputs=output)
+    model.summary()
     return model
 
 def VGG16_fine_tune(weights='imagenet', hp = None):
@@ -157,26 +159,25 @@ def feature_extraction(model_path='model/cnn_mnet.keras'):
 def mnet_Multi(weights='imagenet', hp = None):
     
     feature_input = Input(shape=(576,), name="feature_input")
-    tabular_input = Input(shape=(72,), name="tabular_input")
+    tabular_input = Input(shape=(69,), name="tabular_input")
 
-    # Flatten both
-    x1 = Flatten(name="flatten_feature")(feature_input)
-    x2 = Flatten(name="flatten_tabular")(tabular_input)
+    # Encode Image Features
+    x1 = Dense(units=128, activation="relu", name="encode_features")(feature_input)
 
-    # Concatenate
+    # Encode Tabular Features (The missing step)
+    x2 = Dense(units=64, activation="relu", name="encode_tabular")(tabular_input)
+
+
+    # Symmetric Fusion (128 + 128 = 256 dimensions)
     x = Concatenate(name="concat")([x1, x2])
     
     x = BatchNormalization(name="normalization")(x)
-    x = Dropout(0.3)(x)
+    x = Dropout(0.5)(x)
     x = Dense(units=64, activation="relu", name="dense1")(x)
-    x = Dropout(0.3)(x)
+    x = Dropout(0.2)(x)
     x = Dense(units=64, activation="relu")(x)
     output = Dense(units=1, activation="sigmoid", name="icu")(x)
 
-    # Define the complete model
     model = Model(inputs=[feature_input, tabular_input], outputs=output)
-
-    # # Print summary
     model.summary()
-    
     return model

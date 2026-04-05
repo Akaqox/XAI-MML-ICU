@@ -3,7 +3,7 @@
     "runningConfig": 
         {
             "train_append": 0,
-            "augmentation": 1,
+            "augmentation": 0,
             "segmentation": 0,
             "construct_dataset": 0,
             "construct_val_test": 0,
@@ -27,7 +27,7 @@
             "segmented":"dataset/segmented",
             "ready": "dataset/ready_to_train",
             "feature": "dataset/features",
-            "feature_model":"model/cnn_mnet.keras"
+            "feature_model":"model/cnn_170824.keras"
         },
         
     "augmentation":
@@ -41,7 +41,7 @@
                     "fill_mode": "nearest"
                 },
             "kernel_size": 5,
-            "noise":0.07,
+            "noise":0.1,
             "target_num": 4000
         },
         
@@ -50,12 +50,12 @@
 
     "parameters": 
         {
-            "model": "multi",
+            "model": "clinic",
             "batch_size": 128,
             "nb_classes": 2, 
-            "learning_rate": 1e-04,
+            "learning_rate": 5e-05,
             "epochs": 100,
-            "patience": 9,
+            "patience": 5,
             "dropout": 0.1,
             "IMG_SIZE":224
         },

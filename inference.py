@@ -7,7 +7,7 @@ import numpy as np
 import tensorflow as tf
 import matplotlib.pyplot as plt
 import seaborn as sns
-from sklearn.metrics import confusion_matrix, classification_report
+from sklearn.metrics import confusion_matrix, classification_report, roc_auc_score
 from dataset.dataloader import DataGenerator  # Assuming your class is in utils or paste it above
 from tensorflow.keras import backend as K
 
@@ -20,17 +20,19 @@ from skimage import exposure
 from scipy.ndimage import median_filter, gaussian_filter
 
 # Assuming these are available in your utils
-from utils.utils import readConfig, readXray, cropImg, segmentLung, loadSegmentModel, show_segment, create_destroy_dic, standardization
+from utils.utils import readConfig, readXray, cropImg, segmentLung, loadSegmentModel, show_segment, create_destroy_dic, standardization, plot_roc_curve_binary
 from sklearn.metrics import accuracy_score, precision_score, recall_score
 from sklearn.metrics import f1_score as sk_f1_score  
 from sklearn.metrics import classification_report
+
 # --- CONFIGURATION ---
 config = readConfig()
 paths = config["paths"]
 process_size = (224, 224) 
 visualization = config["runningConfig"]["visualization_on"]
-th = 0.40
-
+# th = 0.37
+th = 0.43
+sample_size = 2000
 # --- CONFIGURATION ---
 CSV_PATH = "dataset/dataset_icu.csv"          # Input Metadata
 OUTPUT_CSV = "dataset/dataset_icu_seg.csv"    # Output (Safety: Don't overwrite input yet)
@@ -39,6 +41,12 @@ DEST_DIR = "dataset/mdrc_seg"                 # Destination for segmented images
 VISUALIZATION = False                         # Set to True if you want to see images pop up
 PROCESS_SIZE = (224, 224)
 
+MODEL_PATH = "model/cnn_170824.keras"
+try:
+    seg = Segment()
+    print("Segmenter loaded.")
+except NameError:
+    print("Error: 'Segment' class not found. Make sure it is defined/imported before running.")
 
 def process():
     print("--- STARTING CSV & SEGMENTATION UPDATE ---")
@@ -59,12 +67,6 @@ def process():
     print(f"Loaded metadata for {len(meta_map)} patients.")
 
     # 2. Initialize Segmenter (Assumed imported from your environment)
-    try:
-        seg = Segment()
-        print("Segmenter loaded.")
-    except NameError:
-        print("Error: 'Segment' class not found. Make sure it is defined/imported before running.")
-        return
 
     # 3. Prepare Output Directories
     os.makedirs(os.path.join(DEST_DIR, "0"), exist_ok=True)
@@ -118,7 +120,7 @@ def process():
     # 7. Build the New CSV Table
     # We iterate over the *DESTINATION* files to ensure we only list what actually exists
     dest_files = glob.glob(os.path.join(DEST_DIR, "**", "*.npy"), recursive=True)
-    
+    dest_files = [f for f in dest_files if "mask" not in f]
     print(f"Building final CSV from {len(dest_files)} segmented files...")
     
     for f_path in dest_files:
@@ -145,6 +147,7 @@ def process():
         print(f"DONE. Saved {len(df_final)} rows to {OUTPUT_CSV}")
     else:
         print("Failed: No data rows were generated.")
+        
 def create_mean_reference(generator, sample_size=None):
     """
     Calculates the pixel-wise average of images in the generator.
@@ -199,11 +202,29 @@ def create_mean_reference(generator, sample_size=None):
     
     return mean_reference.astype(np.float32)
 
-   
-#process()
+hypp = config["parameters"]
+ref_creator = DataGenerator(
+    dataset="train",
+    df= pd.read_csv(config["paths"]["dataset"] + "imputed.csv"),
+    model_name = "mobilenet",
+    IMG_SIZE = hypp["IMG_SIZE"], 
+    batch_size = hypp["batch_size"]
+)
+
+robust_ref_img = create_mean_reference(ref_creator, sample_size=5000)
+
+plt.figure(figsize=(5, 5))
+plt.imshow(robust_ref_img, cmap='gray')
+plt.title("Generated Robust Reference\n(Average of Training Set)")
+plt.axis('off')
+plt.show()
+
+np.save("dataset/reference.npy", robust_ref_img)
+
+# process()
 
 CSV_PATH = "dataset/dataset_icu_seg.csv"
-MODEL_PATH = "model/cnn_mnet.keras"
+
 IMG_SIZE = (224, 224)
 BATCH_SIZE = 1 
 
@@ -226,10 +247,9 @@ for i, label in enumerate(unique_labels):
 
 print("-" * 40)
 
-# 2. Check against your manual list
 severity_order = [
     "Negative for Pneumonia",
-    "Mild Opacities  (1-2 lung zones)",
+    "Mild Opacities  (1-2 lung zones)",      
     "Moderate Opacities (3-4 lung zones)",
     "Severe Opacities (>4 lung zones)"
 ]
@@ -282,15 +302,21 @@ ref_creator = DataGenerator(
     batch_size = hypp["batch_size"]
 )
 
-robust_ref_img = create_mean_reference(ref_creator, sample_size=5000)
+# mean_landmarks, percentiles, _, _ = create_mean_reference(ref_creator, sample_size=sample_size)
 
-plt.figure(figsize=(5, 5))
-plt.imshow(robust_ref_img, cmap='gray')
-plt.title("Generated Robust Reference\n(Average of Training Set)")
-plt.axis('off')
-plt.show()
+# np.save("dataset/mean_landmarks.npy", mean_landmarks)
+# np.save("dataset/percentiles.npy", percentiles)
 
-np.save("dataset/reference.npy", robust_ref_img)
+
+# robust_ref_img = np.load("dataset/reference.npy", )
+
+# plt.figure(figsize=(5, 5))
+# plt.imshow(robust_ref_img, cmap='gray')
+# plt.title("Generated Robust Reference\n(Average of Training Set)")
+# plt.axis('off')
+# plt.show()
+
+# 
 
 # --- 3. INITIALIZE GENERATOR ---
 test_gen = DataGenerator(
@@ -337,6 +363,8 @@ id_to_detailed = dict(zip(df['to_patient_id'], df['original_label']))
 found_count = 0
 unknown_count = 0
 
+edge_cases = 1
+
 for file_path in test_gen.img_list:
     # 1. ID Extraction
     pid = os.path.splitext(os.path.basename(file_path))[0]
@@ -344,17 +372,32 @@ for file_path in test_gen.img_list:
     # 2. Get Detailed Label
     d_label = id_to_detailed.get(pid, "Unknown")
     detailed_labels.append(d_label)
-    
-    # 3. FORCE BINARY MAPPING (The Fix)
-    # We map based on the string, ignoring the CSV 'is_icu' column
-    if d_label in ["Negative for Pneumonia", "Mild Opacities  (1-2 lung zones)"]:
-        b_label = 0  # Non-ICU
-    elif d_label in ["Moderate Opacities (3-4 lung zones)", "Severe Opacities (>4 lung zones)"]:
-        b_label = 1  # ICU
+    if edge_cases:
+        # 3. FORCE BINARY MAPPING (The Fix)
+        # We map based on the string, ignoring the CSV 'is_icu' column
+        if d_label in ["Negative for Pneumonia"]:
+            b_label = 0  # Non-ICU
+        elif d_label in [ "Severe Opacities (>4 lung zones)"]:
+            b_label = 1  # ICU
+        elif d_label in ["Mild Opacities  (1-2 lung zones)", "Moderate Opacities (3-4 lung zones)"]:
+            b_label = -1 
+        else:
+            # Fallback for Unknown or mismatched strings
+            # (defaults to 0, or you can print a warning)
+            b_label = -1 
+         
     else:
-        # Fallback for Unknown or mismatched strings
-        # (defaults to 0, or you can print a warning)
-        b_label = 0 
+        
+        # 3. FORCE BINARY MAPPING (The Fix)
+        # We map based on the string, ignoring the CSV 'is_icu' column
+        if d_label in ["Negative for Pneumonia", "Mild Opacities  (1-2 lung zones)"]:
+            b_label = 0  # Non-ICU
+        elif d_label in ["Moderate Opacities (3-4 lung zones)", "Severe Opacities (>4 lung zones)"]:
+            b_label = 1  # ICU
+        else:
+            # Fallback for Unknown or mismatched strings
+            # (defaults to 0, or you can print a warning)
+            b_label = 0 
         
     y_true.append(b_label)
     
@@ -369,39 +412,105 @@ y_true = np.array(y_true)
 print(f"DEBUG: Label Matching -> Found: {found_count} | Unknown: {unknown_count}")
 print(f"DEBUG: New Class Distribution -> Class 0: {np.sum(y_true==0)} | Class 1: {np.sum(y_true==1)}")
 
+import numpy as np
+from sklearn.metrics import (
+    accuracy_score, 
+    f1_score, 
+    precision_score, 
+    recall_score, 
+    roc_auc_score, 
+    brier_score_loss, 
+    classification_report
+)
 
-print("\n" + "="*40)
-print("CLASSIFICATION METRICS")
-print("="*40)
+def calculate_bootstrapped_metrics(y_true, y_prob, th=0.5, n_iterations=1000):
+    y_true = np.array(y_true)
+    y_prob = np.array(y_prob)
+    
+    y_pred = (y_prob >= th).astype(int)
+    
+    rng = np.random.RandomState(42) 
 
-print(f"Accuracy:  {accuracy_score(y_true, y_pred):.4f}")
-print(f"F1 Score:  {sk_f1_score(y_true, y_pred):.4f}") 
-print(f"Precision: {precision_score(y_true, y_pred):.4f}")
-print(f"Recall:    {recall_score(y_true, y_pred):.4f}")
-print("-" * 40)
-print("Detailed Report:")
+    def specificity_score(yt, yp):
+        # Specificity is the recall of the negative class (0)
+        return recall_score(yt, yp, pos_label=0, zero_division=0)
 
-# ADDED digits=3 HERE
-print(classification_report(y_true, y_pred, target_names=['Non-ICU', 'ICU'], digits=3))
+    metrics_pred = {
+        'Accuracy': accuracy_score,
+        'F1 Score': f1_score,
+        'Precision': precision_score,
+        'Sensitivity': recall_score, # Sensitivity is identical to Recall
+        'Specificity': specificity_score
+    }
+    
+    metrics_prob = {
+        'AUROC': roc_auc_score,
+        'Brier Score': brier_score_loss
+    }
 
+    print("\n" + "="*40)
+    print("CLASSIFICATION METRICS")
+    print("="*40)
+
+    def bootstrap_metric(name, metric_fn, target_y):
+        stats = []
+        point_estimate = metric_fn(y_true, target_y)
+        
+        for _ in range(n_iterations):
+            indices = rng.randint(0, len(y_true), len(y_true))
+            if len(np.unique(y_true[indices])) < 2:
+                continue
+            stats.append(metric_fn(y_true[indices], target_y[indices]))
+        
+        lower = np.percentile(stats, 2.5)
+        upper = np.percentile(stats, 97.5)
+        print(f"{name:<15}: {point_estimate:.3f} (95% CI: {lower:.3f}–{upper:.3f})")
+
+    for name, fn in metrics_pred.items():
+        bootstrap_metric(name, fn, y_pred)
+        
+    for name, fn in metrics_prob.items():
+        bootstrap_metric(name, fn, y_prob)
+
+    print("-" * 40)
+    print("Detailed Report:")
+    print(classification_report(y_true, y_pred, target_names=['Non-ICU', 'ICU'], digits=3))
+
+
+mask = (y_true != -1)
+
+# 2. Apply the mask to both arrays
+y_true = y_true[mask]
+y_pred_probs = y_pred_probs[mask]
+y_pred = y_pred[mask]
+
+
+calculate_bootstrapped_metrics(y_true, y_pred_probs, th=th)
 print("="*40 + "\n")
 
 # B. Plot Matrices
 sns.set_context("talk", font_scale=1.1) 
+plt.figure(figsize=(10, 8))
 
-fig, axes = plt.subplots(1, 2, figsize=(20, 8))
-
-# 1. Binary Matrix
+# Calculate Matrix
 cm_binary = confusion_matrix(y_true, y_pred)
-sns.heatmap(cm_binary, annot=True, fmt='d', cmap='Blues', ax=axes[0],
-            annot_kws={"size": 18, "weight": "bold"},
+
+# Plot
+sns.heatmap(cm_binary, annot=True, fmt='d', cmap='Blues',
+            annot_kws={"size": 20},
             xticklabels=['Non-ICU', 'ICU'], yticklabels=['Non-ICU', 'ICU'])
 
-axes[0].set_title('Binary Confusion Matrix', fontsize=20, fontweight='bold', pad=20)
-axes[0].set_ylabel('True Label', fontsize=16, fontweight='bold')
-axes[0].set_xlabel('Predicted Label', fontsize=16, fontweight='bold')
+plt.title('Confusion Matrix', fontsize=20,  pad=20)
+plt.ylabel('True Label', fontsize=16)
+plt.xlabel('Predicted Label', fontsize=16)
 
-# 2. Detailed Matrix
+# Save
+plt.tight_layout()
+plt.savefig('binary_confusion_matrix.png', dpi=300, bbox_inches='tight')
+plt.show()
+plt.figure(figsize=(10, 8))
+
+# Calculate Matrix
 cm_detailed = pd.crosstab(
     pd.Series(detailed_labels, name='Original'),
     pd.Series(y_pred, name='Predicted'),
@@ -409,25 +518,57 @@ cm_detailed = pd.crosstab(
 )
 cm_detailed.columns = ['Pred Non-ICU', 'Pred ICU']
 
-severity_order = [
-    "Negative for Pneumonia",
-    "Mild Opacities  (1-2 lung zones)",      
-    "Moderate Opacities (3-4 lung zones)",
-    "Severe Opacities (>4 lung zones)"
-]
+
 
 cm_detailed = cm_detailed.reindex(severity_order).fillna(0).astype(int)
+display_labels = [
+    "Negative\n for Pneumonia",
+    "Mild Opacities\n (1-2 lung zones)",      
+    "Moderate Opacities\n (3-4 lung zones)",
+    "Severe Opacities\n (>4 lung zones)"
+]
+# Plot
+sns.heatmap(cm_detailed, annot=True, fmt='d', cmap='YlOrRd',
+            annot_kws={"size": 20}, yticklabels=display_labels)
 
-sns.heatmap(cm_detailed, annot=True, fmt='d', cmap='YlOrRd', ax=axes[1],
-            annot_kws={"size": 16})
+plt.title('Severity Levels', fontsize=20, pad=20)
+plt.ylabel('Severity', fontsize=16)
+plt.xlabel('Model Prediction', fontsize=16)
 
-axes[1].set_title('Detailed Severity Analysis', fontsize=20, fontweight='bold', pad=20)
-axes[1].set_ylabel('Clinical Severity', fontsize=16, fontweight='bold')
-axes[1].set_xlabel('Model Prediction', fontsize=16, fontweight='bold')
-
+# Save
 plt.tight_layout()
+plt.savefig('detailed_severity_analysis.png', dpi=300, bbox_inches='tight')
 plt.show()
+
+# Reset context if needed
 sns.set_context("notebook")
+
+from sklearn.metrics import roc_curve, auc
+
+fpr, tpr, thresholds = roc_curve(y_true, y_pred_probs)
+roc_auc = auc(fpr, tpr)
+
+# Calculate optimal threshold
+optimal_idx = np.argmax(tpr - fpr)
+
+# Create the combined DataFrame
+roc_frame = pd.DataFrame({
+    'fpr': fpr,
+    'tpr': tpr,
+    
+    'roc_auc': np.nan,
+    'opt_fpr': np.nan,
+    'opt_tpr': np.nan,
+    'opt_threshold': np.nan
+})
+
+# Assign metadata to the first row
+roc_frame.loc[0, 'roc_auc'] = roc_auc
+roc_frame.loc[0, 'opt_fpr'] = fpr[optimal_idx]
+roc_frame.loc[0, 'opt_tpr'] = tpr[optimal_idx]
+roc_frame.loc[0, 'opt_threshold'] = thresholds[optimal_idx]
+
+roc_frame.to_csv("results/external_roc.csv", index=False)
 
 
 global_idx = 0

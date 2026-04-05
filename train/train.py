@@ -114,6 +114,8 @@ class Train():
             batch_data = []
             batch_paths = []
 
+            print("Feature extraction model is loaded as" + paths["feature_model"])
+            
             for fpath in tqdm(file_list, desc="Extracting features"):
                 x = np.load(fpath).astype(np.float32)
                 if x.ndim == 2:
@@ -251,8 +253,6 @@ class Train():
             print(best_hps.values)
         else:
             model = self.model
-            " early stop and callbacks..."
-
             
             #create file organization
             today = date.today().strftime("%Y-%m-%d")
@@ -276,7 +276,7 @@ class Train():
                 callbacks=callbacks_list
             )
         
-            evaluate = Evaluate(history, savedirs, model, self.loss)
+            evaluate = Evaluate(model, savedirs, history, self.loss )
             if self.hypp["model"] == "multi":
                 pcts, pct_dict  = self.shap_analysis(evaluate, train_gen, test_gen, "icu", 50)
             else:

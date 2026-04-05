@@ -73,8 +73,9 @@ class Segment():
     
             # 3. Crop and Resize
             img = cropImg(img, mask)
+            mask = cropImg(mask, mask)
             img = cv2.resize(img, process_size)
-     
+            mask = cv2.resize(mask, process_size)
             # --- VISUALIZATION FIX PART 2 ---
             if visualization:
                 plt.figure(figsize=(3, 5))
@@ -92,8 +93,10 @@ class Segment():
             
             
             save = save_path + "/" + str(i) + "/" + str(basename)
+            save_mask = save_path + "/" + str(i) + "/" +"mask_" + str(basename)
             print(save)
             np.save(save, img)
+            np.save(save_mask, mask)
             #print(save)
             
             

@@ -51,7 +51,7 @@ if runningConfig["construct_dataset"] == True:
     gc.collect() 
 #%%
 if runningConfig["train"] == True:
-    for i in range(50):
+    for i in range(300):
         train = Train()
         train.fit()
         gc.collect()
