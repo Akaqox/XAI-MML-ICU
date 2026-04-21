@@ -8,24 +8,7 @@ by S.Kizilisik, A.Terzi, M.Koc and S.Candemir
 
 
 **📄 Abstract**
-Timely prediction of Intensive Care Unit (ICU) admission at hospital arrival is critical for
-clinical decision-making, resource allocation, and patient management, particularly during large-scale health
-crises such as the COVID-19 pandemic. In this study, we propose an explainable multimodal deep learning
-framework that integrates chest X-ray images with clinical variables to estimate ICU admission risk at
-hospital presentation. The model uses a lightweight CNN-backbone for imaging, a multilayer perceptron
-for clinical data, and a mid-level fusion strategy to learn joint representations. To address class imbalance
-and data limitations, focal loss and modality-specific data augmentation are applied. Model explainability
-is ensured through Gradient-weighted Class Activation Mapping for imaging and SHapley Additive exPla-
-nations for clinical variables. Experimental results demonstrate that the multimodal framework achieves
-strong discriminative performance (AUROC = 0.95) and consistent performance across clinically relevant
-subgroups. Key predictors identified by SHAP analysis include C-reactive protein, oxygen saturation,
-hypoxia indicators, and comorbid lung disease, which are consistent with established clinical findings.
-External validation on a multi-center dataset demonstrates generalization to heterogeneous clinical settings
-despite domain shift. Beyond discrimination, the model provides reliable probabilistic estimates, supported
-by improved calibration performance and lower Brier score compared to unimodal baselines. Decision
-curve analysis further indicates higher net benefit across a range of threshold probabilities, supporting its
-potential utility in clinical decision-making. The findings suggest that the proposed framework could provide
-a promising basis for early ICU admission prediction using routinely available data at hospital presentation.
+Timely prediction of Intensive Care Unit (ICU) admission at hospital arrival is critical for clinical decision-making, resource allocation, and patient management, particularly during large-scale health crises such as the COVID-19 pandemic. In this study, we propose an explainable multimodal deep learning framework that integrates chest X-ray images with clinical variables to estimate ICU admission risk at hospital presentation. The model uses a lightweight CNN-backbone for imaging, a multilayer perceptron for clinical data, and a mid-level fusion strategy to learn joint representations. To address class imbalance and data limitations, focal loss and modality-specific data augmentation are applied. Model explainability is ensured through Gradient-weighted Class Activation Mapping for imaging and SHapley Additive exPlanations for clinical variables. Experimental results demonstrate that the multimodal framework achieves strong discriminative performance (AUROC = 0.95) and consistent performance across clinically relevant subgroups. Key predictors identified by SHAP analysis include C-reactive protein, oxygen saturation, hypoxia indicators, and comorbid lung disease, which are consistent with established clinical findings. External validation on a multi-center dataset demonstrates generalization to heterogeneous clinical settings despite domain shift. Beyond discrimination, the model provides reliable probabilistic estimates, supported by improved calibration performance and lower Brier score compared to unimodal baselines. Decision curve analysis further indicates higher net benefit across a range of threshold probabilities, supporting its potential utility in clinical decision-making. The findings suggest that the proposed framework could provide a promising basis for early ICU admission prediction using routinely available data at hospital presentation. 
 
 ---
 
