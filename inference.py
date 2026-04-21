@@ -1,3 +1,15 @@
+# -*- coding: utf-8 -*-
+"""
+Created on  Dec 23 12:20:28 2025
+
+@author: Akaqox(Salih KIZILIŞIK)
+
+This script is experimental codes of paper "Explainable Multimodal Machine Learning Model
+for Predicting Intensive Care Unit Admission " by S.Kizilisik et al. You may use the codes only for research. 
+Plese cite the paper if you use any part of the codes.
+
+"""
+
 import pandas as pd
 import os
 from utils.segmentation import Segment
@@ -8,7 +20,7 @@ import tensorflow as tf
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.metrics import confusion_matrix, classification_report, roc_auc_score
-from dataset.dataloader import DataGenerator  # Assuming your class is in utils or paste it above
+from dataset.dataloader import DataGenerator 
 from tensorflow.keras import backend as K
 
 import glob
@@ -19,7 +31,6 @@ import matplotlib.pyplot as plt
 from skimage import exposure
 from scipy.ndimage import median_filter, gaussian_filter
 
-# Assuming these are available in your utils
 from utils.utils import readConfig, readXray, cropImg, segmentLung, loadSegmentModel, show_segment, create_destroy_dic, standardization, plot_roc_curve_binary
 from sklearn.metrics import accuracy_score, precision_score, recall_score
 from sklearn.metrics import f1_score as sk_f1_score  
@@ -66,7 +77,6 @@ def process():
     meta_map = df.set_index('patient_id').to_dict('index')
     print(f"Loaded metadata for {len(meta_map)} patients.")
 
-    # 2. Initialize Segmenter (Assumed imported from your environment)
 
     # 3. Prepare Output Directories
     os.makedirs(os.path.join(DEST_DIR, "0"), exist_ok=True)
@@ -281,7 +291,7 @@ def f1_score(y_true, y_pred):
 print(f"Loading metadata from {CSV_PATH}...")
 df = pd.read_csv(CSV_PATH)
 
-# FIX: Standardized ID Extraction (Preserves 1.2.826...)
+# Standardized ID Extraction (Preserves 1.2.826...)
 if 'processed_path' in df.columns:
     df['to_patient_id'] = df['processed_path'].apply(lambda x: os.path.splitext(os.path.basename(str(x)))[0])
 else:
@@ -581,7 +591,6 @@ buckets = {
 # Loop through the Generator batches
 for batch_idx in range(len(test_gen)):
     # Get processed batch (X) directly from loader
-    # We ignore the batch_y from loader because we want your FIXED y_true
     X_batch, _ = test_gen[batch_idx]
     
     # Predict on the whole batch (faster)
@@ -609,7 +618,6 @@ for batch_idx in range(len(test_gen)):
         # 3. Add to Bucket (if space exists)
         if key and len(buckets[key]) < num_per_class:
             # We take the first channel for visualization (since it's grayscale repeated)
-            # Img is likely standardized (float), imshow handles this by scaling min-max
             vis_img = img_processed[:, :, 0] 
             buckets[key].append((vis_img, prob))
             

@@ -75,8 +75,7 @@ class DataGenerator(tf.keras.utils.Sequence):
         self.df = df
         if reference is None and os.path.isfile("dataset/reference.npy"):
             self.reference_img = standardization(np.load("dataset/reference.npy"))
-            self.ref_landmarks = np.load("dataset/mean_landmarks.npy")
-            self.percentiles = np.load("dataset/percentiles.npy")
+
         
         if model_name == "clinic" or model_name == "multi":
             self.exclude_cols = ["to_patient_id", "is_icu"]

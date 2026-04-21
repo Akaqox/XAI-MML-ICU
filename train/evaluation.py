@@ -171,7 +171,7 @@ class Evaluate():
                 if trainp["model"] == "multi":
                     X_tabular_test = X_input
                     print(len(X_tabular_test))
-                    # Assuming you extracted the clinical test array into a variable named X_tabular_test
+
                     subgroup_text = self.generate_subgroup_report(y_true, y_pred, X_tabular_test, th)
                     
                     report_file.write("\n\n------------------- SUBGROUP ANALYSIS -------------------\n")
@@ -303,7 +303,7 @@ class Evaluate():
         ax1.plot([0, 1], [0, 1], linestyle='--', color='gray', label='Perfect Calibration')
 
         # 3. Add a Histogram (Standard for Medical Papers)
-        # This shows the density of your predictions along the x-axis
+        # This shows the density of predictions along the x-axis
         ax2 = ax1.twinx()  # Create a twin y-axis for the histogram
         ax2.hist(y_prob, bins=10, range=(0, 1), alpha=0.1, color='blue', density=True)
         ax2.set_ylabel("Density of Predictions", color='gray', fontsize=16)
@@ -777,8 +777,8 @@ class Evaluate():
             else:
                 tabular_batch = Input     # Single-input model: it is already an array
                 
-            # 2. Now you can safely check the shape and append
-            if len(tabular_batch.shape) >= 1: # (Or whatever condition you need)
+
+            if len(tabular_batch.shape) >= 1: 
                 input_list.append(np.squeeze(tabular_batch))
                 
             y_true_list.append(y_true)
@@ -811,12 +811,11 @@ def plot_combined_decision_curves(csv_list, model_labels):
     nb_all = first_df['nb_all']
     prevalence = first_df['nb_all'].iloc[0] # Approx prevalence from t=0.01
 
-    # 1. Plot Baselines (Same style as your code)
+    # 1. Plot Baselines 
     plt.plot(thresholds, nb_all, lw=2, label="Treat All", color='gray', linestyle='--')
     plt.axhline(y=0, color='black', lw=1, label="Treat None")
 
     # 2. Plot Each Model
-    # You can define a list of colors if you have many models
     colors = ['blue', 'red', 'green']
     
     for i, csv_path in enumerate(csv_list):
@@ -824,7 +823,7 @@ def plot_combined_decision_curves(csv_list, model_labels):
         plt.plot(df['threshold'], df['nb_model'], lw=2, alpha = 0.7,
                  label=model_labels[i], color=colors[i % len(colors)])
 
-    # 3. Professional Adjustments (Exact copy of your style)
+    # 3. Adjustments
     plt.ylim(-0.05, prevalence + 0.1)
     plt.xlabel("Threshold Probability", fontsize=16)
     plt.ylabel("Net Benefit", fontsize=16)

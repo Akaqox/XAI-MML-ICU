@@ -1,3 +1,12 @@
+"""
+
+@author: Akaqox(Salih KIZILIŞIK)
+
+This script is experimental codes of paper "Explainable Multimodal Machine Learning Model
+for Predicting Intensive Care Unit Admission " by S.Kizilisik et al. You may use the codes only for research. 
+Plese cite the paper if you use any part of the codes.
+"""
+
 import os
 import cv2
 import json
@@ -16,116 +25,8 @@ OUTPUT_DIR = "dataset/mdrc/"
 TARGET_SIZE = (1525, 1270)  # (Width, Height)
 ref_dataset = "dataset/Train"
 seg = Segment()
-landmarks_path = "dataset/mean_landmarks.npy"
-percentiles_path = "dataset/percentiles.npy"
+
 import matplotlib.pyplot as plt
-
-def create_mean_reference(paths, sample_size=None, num_visualize=3):
-    """
-    Calculates the Nyul-Udupa statistical reference (average percentiles)
-    from the training set, strictly using lung tissue. 
-    Also extracts a single 'Golden Image' for Fourier Domain Adaptation.
-    Tracks and prints the intensity domain of the dataset.
-    """
-    total_files = len(paths)
-    if sample_size is None or sample_size > total_files:
-        sample_size = total_files
-
-    subset_paths = np.copy(paths)
-    np.random.seed(42) 
-    np.random.shuffle(subset_paths)
-    subset_paths = subset_paths[:sample_size]
-    
-    print(f"Computing Nyul-Udupa landmarks from {len(subset_paths)} training images...")
-
-    all_landmarks = []
-    ref_percentiles = np.array([1, 10, 20, 30, 40, 50, 60, 70, 80, 90, 99]) 
-    
-    golden_img = None
-    golden_mask = None
-    count = 0
-
-    # --- DOMAIN TRACKING VARIABLES ---
-    global_img_min = float('inf')
-    global_img_max = float('-inf')
-    global_tissue_min = float('inf')
-    global_tissue_max = float('-inf')
-    # ---------------------------------
-
-    for i, path in enumerate(subset_paths):
-        try:
-            arr = readXray(path)
-            if arr is not None:
-                arr = cv2.resize(arr, TARGET_SIZE)
-                
-            img = np.repeat(arr[..., np.newaxis], 1, -1)
-            
-            # --- TRACK RAW IMAGE DOMAIN ---
-            global_img_min = min(global_img_min, img.min())
-            global_img_max = max(global_img_max, img.max())
-            
-            mask = seg.makeMask(img)
-            tissue_vals = img[mask > 0]
-            
-            if len(tissue_vals) == 0:
-                continue
-                
-            # --- TRACK TISSUE DOMAIN ---
-            global_tissue_min = min(global_tissue_min, tissue_vals.min())
-            global_tissue_max = max(global_tissue_max, tissue_vals.max())
-                
-            if count < num_visualize:
-                fig, axes = plt.subplots(1, 3, figsize=(15, 4))
-                axes[0].imshow(np.squeeze(img), cmap='gray')
-                axes[0].set_title(f"Raw Image {count+1}")
-                axes[0].axis('off')
-                
-                axes[1].imshow(np.squeeze(mask), cmap='bone')
-                axes[1].set_title("Segmentor Mask")
-                axes[1].axis('off')
-                
-                axes[2].hist(tissue_vals.flatten(), bins=50, color='teal', alpha=0.7)
-                axes[2].set_title("Isolated Tissue Distribution")
-                axes[2].set_xlabel("Pixel Intensity")
-                axes[2].set_ylabel("Frequency")
-                
-                plt.tight_layout()
-                plt.show() 
-
-            if golden_img is None:
-                golden_img = img.copy()
-                golden_mask = mask.copy()
-            
-            landmarks = np.percentile(tissue_vals, ref_percentiles)
-            all_landmarks.append(landmarks)
-            count += 1
-            
-            if i % 100 == 0:
-                print(f"Processed {i}/{len(subset_paths)}...", end='\r')
-                
-        except Exception as e:
-            print(f"Skipped bad file {path}: {e}")
-
-    if count == 0:
-        raise ValueError("No images were loaded or segmented successfully!")
-        
-    ref_landmarks = np.mean(all_landmarks, axis=0)
-    
-    # --- PRINT DOMAIN RESULTS ---
-    print(f"\nDone. Computed statistical reference from {count} images.")
-    print("-" * 40)
-    print("DATASET INTENSITY DOMAIN:")
-    print(f"Raw Image Bounds : [{global_img_min:.2f}, {global_img_max:.2f}]")
-    print(f"Lung Tissue Bounds: [{global_tissue_min:.2f}, {global_tissue_max:.2f}]")
-    print("-" * 40)
-    print("Mean Landmarks (Percentiles):")
-    print(np.round(ref_landmarks, 2))
-    print("-" * 40)
-    
-    np.save(landmarks_path, ref_landmarks)
-    np.save(percentiles_path, ref_percentiles)
-    
-    return ref_landmarks, ref_percentiles, golden_img, golden_mask
 
 def ensure_directories():
     """Creates the folder structure: processed_dataset/0 and processed_dataset/1"""
@@ -212,7 +113,6 @@ def apply_nyul_udupa(external_img, external_mask, ref_landmarks, percentiles):
     ext_landmarks = np.percentile(tissue_vals, percentiles)
     standardized_vals = np.interp(tissue_vals, ext_landmarks, ref_landmarks)
 
-    # --- THE FIX: Upgrade memory capacity to prevent static ---
     standardized_img = external_img.astype(np.float32)
     standardized_img[external_mask > 0] = standardized_vals
     
@@ -225,8 +125,7 @@ def process_dataset():
     if not json_files:
         print("No JSON found.")
         return
-    ref_landmarks = np.load(landmarks_path)
-    ref_percentiles = np.load(percentiles_path)
+    
     count = 0
     for json_file in json_files:
         with open(json_file, 'r') as f:
@@ -254,8 +153,7 @@ def process_dataset():
                         # Get Image Path (Middle of stack)
                         images = study_map[study_uid]
                         img_path = images[len(images)//2]
-                        
-                        # --- YOUR EXACT LOGIC START ---
+
                         arr = readXray(img_path)
                         
                         if arr is not None:
@@ -264,12 +162,10 @@ def process_dataset():
                             arr = arr.astype(np.float32)
                             arr = (arr - arr.min()) / (arr.max() - arr.min() + 1e-8) * 4095.0
                             # --------------------------------------
-                            # --- YOUR EXACT LOGIC END ---
+
                             mask = seg.makeMask(arr)
                             mask = np.squeeze(mask)
-                            
-                            standardized_img = apply_nyul_udupa(arr, mask, ref_landmarks, ref_percentiles)
-                                
+
                             # --- VISUALIZATION QA BLOCK ---
                             if count < 3:  # Adjust to see more or fewer images
                                 tissue_vals_original = arr[mask > 0]
