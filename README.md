@@ -8,7 +8,24 @@ by S.Kizilisik, A.Terzi, M.Koc and S.Candemir
 
 
 **📄 Abstract**
-Timely prediction of Intensive Care Unit (ICU) admission is crucial for optimizing clinical decision-making and resource management, especially in high-pressure healthcare settings. This study investigates the effectiveness of a multimodal machine learning framework that integrates imaging data and clinical data—including vital signs, laboratory results, and co-morbidities—to predict the ICU requirement of COVID-19 patients at the time of hospital admission. Utilizing a publicly available dataset, we implemented a pipeline that includes lung region segmentation, data preprocessing and augmentation, and feature learning via a pre-trained convolutional neural network architecture. The multimodal model, trained with focal loss to address class imbalance, achieved an area under the receiver operating characteristic curve of 0.96. To interpret the model’s decision, we used Gradient-weighted Class Activation Mapping to visualize salient lung regions and SHapley Additive exPlanations to assess the individual importance of clinical features. The most influential predictors included C-reactive protein, creatinine, eGFR, glucose, and symptom duration, consistent with findings from correlation analysis. The results validate the clinical relevance of our approach, which offers a transparent and effective tool for early ICU risk stratification using data commonly available upon admission.
+Timely prediction of Intensive Care Unit (ICU) admission at hospital arrival is critical for
+clinical decision-making, resource allocation, and patient management, particularly during large-scale health
+crises such as the COVID-19 pandemic. In this study, we propose an explainable multimodal deep learning
+framework that integrates chest X-ray images with clinical variables to estimate ICU admission risk at
+hospital presentation. The model uses a lightweight CNN-backbone for imaging, a multilayer perceptron
+for clinical data, and a mid-level fusion strategy to learn joint representations. To address class imbalance
+and data limitations, focal loss and modality-specific data augmentation are applied. Model explainability
+is ensured through Gradient-weighted Class Activation Mapping for imaging and SHapley Additive exPla-
+nations for clinical variables. Experimental results demonstrate that the multimodal framework achieves
+strong discriminative performance (AUROC = 0.95) and consistent performance across clinically relevant
+subgroups. Key predictors identified by SHAP analysis include C-reactive protein, oxygen saturation,
+hypoxia indicators, and comorbid lung disease, which are consistent with established clinical findings.
+External validation on a multi-center dataset demonstrates generalization to heterogeneous clinical settings
+despite domain shift. Beyond discrimination, the model provides reliable probabilistic estimates, supported
+by improved calibration performance and lower Brier score compared to unimodal baselines. Decision
+curve analysis further indicates higher net benefit across a range of threshold probabilities, supporting its
+potential utility in clinical decision-making. The findings suggest that the proposed framework could provide
+a promising basis for early ICU admission prediction using routinely available data at hospital presentation.
 
 ---
 
@@ -21,7 +38,7 @@ Timely prediction of Intensive Care Unit (ICU) admission is crucial for optimizi
 * **Class Imbalance Handling:** Employs Focal Loss during training to effectively address imbalanced datasets, common in medical prediction tasks.
   
 <div align="center">
-  <img src="final_results/multimodal_arch.png" width="70%" />
+  <img src="final_results/multimodal_arch.png" width="40%" />
 </div>
 
 
@@ -52,6 +69,7 @@ activations in the lung areas, suggesting the model bases its decisions primaril
 </div>
 
 # 🚀 Performance
+
 ## CXR Model
 
 <div align="center" style="display: flex; gap: 10px; width: 60%; align-items: center; flex-wrap: nowrap; overflow-x: auto;">
@@ -77,6 +95,12 @@ activations in the lung areas, suggesting the model bases its decisions primaril
   <img src="final_results/multi_test/multiv6/multi_cm_plot.png" style="width: 22%; height: auto; margin:auto;" />
 </div>
 
+## General Review Figure(Receiver operating characteristic and Decision Curve Analysis)
+
+<div align="center" style="display: flex; gap: 10px; justify-content: center; margin-bottom: 20px;">
+  <img src="final_results/Combined_ROC.png" style="width: 44%; height: auto; margin:auto;" />
+  <img src="final_results/Combined_DCA.png" style="width: 44%; height: auto; margin:auto;"/>
+</div>
 
 ## Model Performance Comparison
 
@@ -103,6 +127,12 @@ activations in the lung areas, suggesting the model bases its decisions primaril
 | **Comorbidity (Yes)** | 0.899 | 0.953 | 0.912 | 0.932 | 0.956 |
 | **Comorbidity (No)** | 0.877 | 0.950 | 0.849 | 0.897 | 0.942 |
 
+## External Dataset (MobilenetV3Small)
+
+<div align="center" style="display: flex; gap: 10px; justify-content: center; margin-bottom: 20px;">
+  <img src="final_results/external_roc.png" style="width: 36%; height: auto; margin:auto;" />
+  <img src="final_results/external_severity.png" style="width: 45%; height: auto; margin:auto;"/>
+</div>
 # 🛠️ Getting Started
 Prerequisites can be found in env_backup.yaml file
 
@@ -170,8 +200,9 @@ if runningConfig["train"] == True:
     for i in range(50):
         # train.fit()
 ```
-**📊 Dataset**
-COVID-19-NY-SBU
+**📊 Datasets**
+<br>
+COVID-19-NY-SBU,<br>
 MIDRC-C
 
 **📝 Citation**
