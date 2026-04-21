@@ -2,7 +2,7 @@
 This repository contains the experimental codebase for the research paper:
 
 "Explainable Multimodal Machine Learning Model for Predicting Intensive Care Unit Admission"
-by S.Kizilisik, A.Terzi, M.Koc and S.Candemir
+by S.Kizilisik, A.Terzi, S.Candemir
 
 ---
 
