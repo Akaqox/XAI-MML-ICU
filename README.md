@@ -193,7 +193,7 @@ This code is provided for research purposes only. If you use any part of this co
 ```
 (TO BE UPDATED)
 @article{Kizilisik_ICU_Prediction,
-  author={Kizilisik, S. and Terzi, A. and Koc, M and  Candemir, S.},
+  author={Kizilisik, S. and Terzi, A. and Candemir, S.},
   title={Explainable Multimodal Machine Learning Model for Predicting Intensive Care Unit Admission},
   journal={Journal Name (e.g., IEEE Transactions on Medical Imaging)},
   year={Year of Publication}, # e.g., 2024
