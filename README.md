@@ -55,40 +55,53 @@ activations in the lung areas, suggesting the model bases its decisions primaril
 ## CXR Model
 
 <div align="center" style="display: flex; gap: 10px; width: 60%; align-items: center; flex-wrap: nowrap; overflow-x: auto;">
-  <img src="final_results/multi%20test/mobilenetv3/plot_20250721_201000_100ep_8000img.png" style="width: 44%; height: auto; margin:auto;" />
-  <img src="final_results/multi%20test/mobilenetv3/roc_prec_recall_20250721_201000_100ep_8000img.png" style="width: 22%; height: auto; margin:auto;" />
-  <img src="final_results/multi%20test/mobilenetv3/cm_plot_20250721_201000_100ep_8000imgimg.png" style="width: 22%; height: auto; margin:auto;" />
+  <img src="final_results/mobilenet/0874/img_plot.png" style="width: 44%; height: auto; margin:auto;" />
+  <img src="final_results/mobilenet/0874/img_calibration.png" style="width: 22%; height: auto; margin:auto;" />
+  <img src="final_results/mobilenet/0874/img_cm_plot.png" style="width: 22%; height: auto; margin:auto;" />
 </div>
 
 ## Clinic Model
 
 <div align="center" style="display: flex; gap: 10px; align-items: center;">
-  <img src="final_results/multi%20test/clinicv2/plot_20250721_132211_48ep_8000img.png"  style="width: 44%; height: auto; margin:auto;" />
-  <img src="final_results/multi%20test/clinicv2/roc_prec_recall_20250721_132211_48ep_8000img.png"  style="width: 22%; height: auto; margin:auto;" />
-  <img src="final_results/multi%20test/clinicv2/cm_plot_20250721_132211_48ep_8000imgimg.png"  style="width: 22%; height: auto; margin:auto;" />
+  <img src="final_results/clinical/clinical3/clinic_plot.png"  style="width: 44%; height: auto; margin:auto;" />
+  <img src="final_results/clinical/clinical3/clinic_calibration.png"  style="width: 22%; height: auto; margin:auto;" />
+  <img src="final_results/clinical/clinical3/clinic_cm_plot.png"  style="width: 22%; height: auto; margin:auto;" />
 </div>
 
 ## Multimodal Fused Approach
 
 <!-- First row: 3 images side by side -->
 <div align="center" style="display: flex; gap: 10px; justify-content: center; margin-bottom: 20px;">
-  <img src="final_results/multi%20test/multiv4/plot_20250722_152420_33ep_8000img.png" style="width: 44%; height: auto; margin:auto;" />
-  <img src="final_results/multi%20test/multiv4/roc_prec_recall_20250722_152420_33ep_8000img.png" style="width: 22%; height: auto; margin:auto;"/>
-  <img src="final_results/multi%20test/multiv4/cm_plot_20250722_152420_33ep_8000imgimg.png" style="width: 22%; height: auto; margin:auto;" />
+  <img src="final_results/multi_test/multiv6/multi_plot.png" style="width: 44%; height: auto; margin:auto;" />
+  <img src="final_results/multi_test/multiv6/multi_calibration.png" style="width: 22%; height: auto; margin:auto;"/>
+  <img src="final_results/multi_test/multiv6/multi_cm_plot.png" style="width: 22%; height: auto; margin:auto;" />
 </div>
 
 
+## Model Performance Comparison
+
+| Model | Accuracy | Precision | Recall | F1 Score | AUC | Brier Score | 
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | 
+| **Imaging-only Model (CNN)** | 0.874 | 0.938 | 0.879 | 0.907 | 0.928 | 0.150 |
+| **Clinical-only Model (MLP)** | 0.779 | 0.926 | 0.744 | 0.825 | 0.835 | 0.177 |
+| **Fused Model (opt.Thr)** | 0.889 | 0.952 | 0.886 | 0.918 | 0.951 | 0.102 | 
+| **Fused Model (High Sens.)** | 0.874 | 0.879 | 0.950 | 0.913 | 0.951 | - |
+| **Imaging-only (Ext., Unadj.)** | 0.697 | 0.693 | 0.698 | 0.696 | 0.770 | - |
+| **Imaging-only (Ext., Adj.)** | 0.717 | 0.712 | 0.721 | 0.716 | 0.779 | - | 
+| **Imaging-only (Ext., Neg/Sev)** | 0.811 | 0.743 | 0.797 | 0.769 | 0.892 | - | 
 
 ---
 
-## Performance Comparison Table
+## Subgroup Performance (Fused Model)
 
-| Model                       | Accuracy | Precision | Recall |   F1   |   AUC   |    Score Notes     |
-|-----------------------------|----------|-----------|--------|--------|---------|--------------------|
-| CXR Model(MobilenetV3 Small)| 0.875     | 0.847      | 0.871   | 0.857   | 0.929    |Baseline image-only |
-| Clinic Model                | 0.807     | 0.771      | 0.792   | 0.779   | 0.866    |Clinical data only  |
-| Multimodal Model            | 0.902     | 0.875      | 0.909   | 0.888   | 0.957    |Fusion of both data |
----
+| Subgroup | Accuracy | Precision | Recall | F1 Score | AUC |
+| :--- | :---: | :---: | :---: | :---: | :---: | 
+| **Male** | 0.881 | 0.960 | 0.885 | 0.921 | 0.945 |
+| **Female** | 0.909 | 0.917 | 0.893 | 0.905 | 0.962 |
+| **Age < 60** | 0.887 | 0.970 | 0.877 | 0.921 | 0.958 |
+| **Age ≥ 60** | 0.891 | 0.923 | 0.902 | 0.912 | 0.947 |
+| **Comorbidity (Yes)** | 0.899 | 0.953 | 0.912 | 0.932 | 0.956 |
+| **Comorbidity (No)** | 0.877 | 0.950 | 0.849 | 0.897 | 0.942 |
 
 # 🛠️ Getting Started
 Prerequisites can be found in env_backup.yaml file
@@ -159,6 +172,7 @@ if runningConfig["train"] == True:
 ```
 **📊 Dataset**
 COVID-19-NY-SBU
+MIDRC-C
 
 **📝 Citation**
 This code is provided for research purposes only. If you use any part of this codebase or the methodology described, please cite the following paper:
