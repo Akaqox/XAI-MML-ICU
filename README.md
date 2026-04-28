@@ -1,7 +1,7 @@
-# XAI-MML-ICU: Explainable Multimodal Machine Learning for ICU Admission Prediction
+# XAI-MML-ICU: Explainable Multimodal Machine Learning Model for Predicting ICU Admission at Hospital Arrival
 This repository contains the experimental codebase for the research paper:
 
-"Explainable Multimodal Machine Learning Model for Predicting Intensive Care Unit Admission"
+"Explainable Multimodal Machine Learning Model for Predicting ICU Admission at Hospital Arrival"
 by S.Kizilisik, A.Terzi, S.Candemir
 
 ---
@@ -191,17 +191,17 @@ MIDRC-C
 **📝 Citation**
 This code is provided for research purposes only. If you use any part of this codebase or the methodology described, please cite the following paper:
 ```
-(TO BE UPDATED)
-@article{Kizilisik_ICU_Prediction,
-  author={Kizilisik, S. and Terzi, A. and Candemir, S.},
-  title={Explainable Multimodal Machine Learning Model for Predicting Intensive Care Unit Admission},
-  journal={Journal Name (e.g., IEEE Transactions on Medical Imaging)},
-  year={Year of Publication}, # e.g., 2024
-  volume={Volume Number},
-  number={Issue Number},
-  pages={Page Range},
-  doi={DOI Link} # e.g., 10.1109/TMI.2024.XXXXXXX
-}
+@ARTICLE{11494663,
+  author={Kizilisik, Salih and Terzi, Aysegül and Candemir, Sema},
+  journal={IEEE Access}, 
+  title={Explainable Multimodal Machine Learning Model for Predicting ICU Admission at Hospital Arrival}, 
+  year={2026},
+  volume={},
+  number={},
+  pages={1-1},
+  keywords={Feeds;Filtering;Filters;Radio frequency;Protocols;Communication systems;Digital images;Electronic mail;Receivers;Internetworking;ICU admission prediction;Multimodal learning;Explainable artificial intelligence;Chest X-ray;Clinical decision support},
+  doi={10.1109/ACCESS.2026.3687397}}
+
 ```
 
 
