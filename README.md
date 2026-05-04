@@ -196,11 +196,12 @@ This code is provided for research purposes only. If you use any part of this co
   journal={IEEE Access}, 
   title={Explainable Multimodal Machine Learning Model for Predicting ICU Admission at Hospital Arrival}, 
   year={2026},
-  volume={},
+  volume={14},
   number={},
-  pages={1-1},
-  keywords={Feeds;Filtering;Filters;Radio frequency;Protocols;Communication systems;Digital images;Electronic mail;Receivers;Internetworking;ICU admission prediction;Multimodal learning;Explainable artificial intelligence;Chest X-ray;Clinical decision support},
+  pages={64412-64426},
+  keywords={Feeds;Filtering;Filters;Radio frequency;Protocols;Communication systems;Digital images;Electronic mail;Receivers;Internetworking;ICU admission prediction;multimodal learning;explainable artificial intelligence;chest X-ray;clinical decision support},
   doi={10.1109/ACCESS.2026.3687397}}
+
 
 ```
 
